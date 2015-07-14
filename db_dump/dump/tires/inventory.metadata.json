@@ -1,0 +1,1 @@
+{ "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "ns" : "tires.inventory", "name" : "_id_" }, { "v" : 1, "key" : { "shop_id" : 1 }, "ns" : "tires.inventory", "name" : "shop_id_1" }, { "v" : 1, "key" : { "tire" : 1 }, "ns" : "tires.inventory", "name" : "tire_1" } ] }

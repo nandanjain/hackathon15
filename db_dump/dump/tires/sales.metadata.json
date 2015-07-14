@@ -1,0 +1,1 @@
+{ "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "ns" : "tires.sales", "name" : "_id_" }, { "v" : 1, "key" : { "date" : -1 }, "ns" : "tires.sales", "name" : "date_-1" } ] }

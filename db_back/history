@@ -1,0 +1,60 @@
+{ "_id" : { "$oid" : "5447dea6b23207e967fe4fe6" }, "tire" : "175/65-14", "quality" : "new", "quantity" : 20, "shop_id" : 7 }
+{ "_id" : { "$oid" : "544ad8c3b23207fa0afe4fe6" }, "quality" : "new", "quantity" : 20, "date" : "2014-10-24T22:50:06.395Z", "tire" : "175/65-14", "shop_id" : 7 }
+{ "_id" : { "$oid" : "544af6d2b23207e967fe4fe7" }, "tire" : "175/65-14", "quality" : "used", "quantity" : 15, "shop_id" : 7 }
+{ "_id" : { "$oid" : "544bf0d8b23207e967fe4fe8" }, "quality" : "used", "quantity" : 1000, "date" : "2014-10-25T18:45:01.736Z", "tire" : "175/65-14", "shop_id" : 7 }
+{ "_id" : { "$oid" : "544bf476b232071767fe4fe6" }, "tire" : "175/65-14", "quality" : "used", "quantity" : 20, "shop_id" : 7 }
+{ "_id" : { "$oid" : "544bf94cb23207e967fe4fe9" }, "quality" : "used", "quantity" : 4, "date" : "2014-10-25T19:21:02.826Z", "tire" : "225/60-16", "shop_id" : 7 }
+{ "_id" : { "$oid" : "54651810b23207cd7608fce6" }, "quality" : "used", "quantity" : 20, "date" : "2014-11-13T20:38:33.493Z", "tire" : "175/65-14", "shop_id" : 7 }
+{ "_id" : { "$oid" : "54651887b232073e7608fce6" }, "quality" : "used", "quantity" : 20, "date" : "2014-11-13T20:40:32.811Z", "tire" : "185/45-14", "shop_id" : 7 }
+{ "_id" : { "$oid" : "54652262b232072b1608fce6" }, "quality" : "used", "quantity" : 20, "date" : "2014-11-13T21:22:37.206Z", "tire" : "175/65-15", "shop_id" : 3 }
+{ "_id" : { "$oid" : "54652338b23207427608fce6" }, "quality" : "used", "quantity" : 20, "date" : "2014-11-13T21:26:11.289Z", "tire" : "175/65-14", "shop_id" : 3 }
+{ "_id" : { "$oid" : "54652689b23207cd7608fce7" }, "quality" : "used", "quantity" : 20, "date" : "2014-11-13T21:40:19.587Z", "tire" : "175/65-14", "shop_id" : 3 }
+{ "_id" : { "$oid" : "54652912b23207cd7608fce8" }, "quality" : "used", "quantity" : 20, "date" : "2014-11-13T21:51:08.697Z", "tire" : "175/65-14", "shop_id" : 3 }
+{ "_id" : { "$oid" : "54658268b23207cd7608fce9" }, "quality" : "new", "quantity" : 20, "date" : "2014-11-14T04:12:18.162Z", "tire" : "175/65-14", "shop_id" : 3 }
+{ "_id" : { "$oid" : "546582eeb232072b1608fce9" }, "quality" : "new", "quantity" : 20, "date" : "2014-11-14T04:14:32.736Z", "tire" : "175/65-14", "shop_id" : 3 }
+{ "_id" : { "$oid" : "54658c1fb232072b1608fcea" }, "quality" : "new", "quantity" : 20, "date" : "2014-11-14T04:53:45.206Z", "tire" : "175/65-14", "shop_id" : 3 }
+{ "_id" : { "$oid" : "5465ad3ab232073f7608fce6" }, "quality" : "new", "quantity" : 20, "date" : "2014-11-14T07:14:58.544Z", "tire" : "175/65-14", "shop_id" : 3 }
+{ "_id" : { "$oid" : "5466480bb23207417608fce6" }, "quality" : "used", "quantity" : 10, "date" : "2014-11-14T18:15:32.173Z", "tire" : "175/65-14", "shop_id" : 7 }
+{ "_id" : { "$oid" : "5467aeb1b232072a1608fce7" }, "quality" : "used", "quantity" : 20, "date" : "2014-11-15T19:45:42.365Z", "tire" : "175/65-14", "shop_id" : 7 }
+{ "_id" : { "$oid" : "5467bf4fb232072b1608fceb" }, "quality" : "new", "quantity" : 50, "date" : "2014-11-15T20:56:37.389Z", "tire" : "175/65-14", "shop_id" : 7 }
+{ "_id" : { "$oid" : "5474dd18b23207423bb6afec" }, "quality" : "used", "quantity" : 20, "date" : "2014-11-25T19:42:55.034Z", "tire" : "175/65-14", "shop_id" : 7 }
+{ "_id" : { "$oid" : "547b9ffeb2320791224c5576" }, "quality" : "used", "quantity" : 500, "date" : "2014-11-30T22:47:54.094Z", "tire" : "215/65-16", "shop_id" : 7 }
+{ "_id" : { "$oid" : "547bb8c2b2320721174c5577" }, "quality" : "used", "quantity" : 30, "date" : "2014-12-01T00:33:35.641Z", "tire" : "175/65-16", "shop_id" : 7 }
+{ "_id" : { "$oid" : "547bbbdeb23207f8224c5577" }, "quality" : "used", "quantity" : 30, "date" : "2014-12-01T00:46:51.159Z", "tire" : "175/65-14", "shop_id" : 7 }
+{ "_id" : { "$oid" : "547e447bb2320791224c5578" }, "quality" : "used", "quantity" : 10, "date" : "2014-12-02T22:54:14.161Z", "tire" : "255/55-19", "shop_id" : 0 }
+{ "_id" : { "$oid" : "547e4488b23207f8224c5578" }, "quality" : "used", "quantity" : 10, "date" : "2014-12-02T22:54:27.207Z", "tire" : "255/55-19", "shop_id" : 0 }
+{ "_id" : { "$oid" : "547e482eb2320791224c557a" }, "quality" : "used", "quantity" : 4, "date" : "2014-12-02T23:10:01.680Z", "tire" : "195/70-14", "shop_id" : 0 }
+{ "_id" : { "$oid" : "547f75a8b2320728174c5578" }, "quality" : "used", "quantity" : 10, "date" : "2014-12-03T20:36:16.678Z", "tire" : "195/65-15", "shop_id" : 0 }
+{ "_id" : { "$oid" : "5481eb68b2320756334c5576" }, "quality" : "used", "quantity" : 30, "date" : "2014-12-05T17:23:10.213Z", "tire" : "175/65-14", "shop_id" : 7 }
+{ "_id" : { "$oid" : "5481eb6fb2320758334c5576" }, "quality" : "new", "quantity" : 30, "date" : "2014-12-05T17:23:17.207Z", "tire" : "175/65-14", "shop_id" : 7 }
+{ "_id" : { "$oid" : "54826b79b2320758334c5577" }, "quality" : "new", "quantity" : 20, "date" : "2014-12-06T02:29:35.885Z", "tire" : "165/60-13", "shop_id" : 7 }
+{ "_id" : { "$oid" : "5482b388b2320791224c557c" }, "quality" : "used", "quantity" : 1288, "date" : "2014-12-06T07:37:02.874Z", "tire" : "165/40-13", "shop_id" : 7 }
+{ "_id" : { "$oid" : "5482b391b232071f174c5577" }, "quality" : "new", "quantity" : 589, "date" : "2014-12-06T07:37:12.218Z", "tire" : "165/40-13", "shop_id" : 7 }
+{ "_id" : { "$oid" : "54834268b2320756334c5577" }, "quality" : "used", "quantity" : 1, "date" : "2014-12-06T17:46:36.257Z", "tire" : "195/65-15", "shop_id" : 7 }
+{ "_id" : { "$oid" : "54834273b2320720174c5576" }, "quality" : "used", "quantity" : 1, "date" : "2014-12-06T17:46:47.860Z", "tire" : "195/65-15", "shop_id" : 7 }
+{ "_id" : { "$oid" : "54834289b2320722174c5576" }, "quality" : "used", "quantity" : 1, "date" : "2014-12-06T17:47:09.443Z", "tire" : "195/65-15", "shop_id" : 7 }
+{ "_id" : { "$oid" : "54834297b232071f174c5579" }, "quality" : "new", "quantity" : 50, "date" : "2014-12-06T17:47:24.006Z", "tire" : "195/65-15", "shop_id" : 7 }
+{ "_id" : { "$oid" : "54849e53b2320728174c557a" }, "quality" : "used", "quantity" : 30, "date" : "2014-12-07T18:31:03.316Z", "tire" : "175/65-14", "shop_id" : 7 }
+{ "_id" : { "$oid" : "5484a30cb23207f8224c557c" }, "quality" : "used", "quantity" : 30, "date" : "2014-12-07T18:51:11.619Z", "tire" : "175/65-14", "shop_id" : 7 }
+{ "_id" : { "$oid" : "54873a1fb23207fa03e63be9" }, "quality" : "used", "quantity" : 10, "date" : "2014-12-09T18:00:13.800Z", "tire" : "215/60-16", "shop_id" : 0 }
+{ "_id" : { "$oid" : "548b701fb23207fa03e63beb" }, "quality" : "new", "quantity" : 50, "date" : "2014-12-12T22:39:38.570Z", "tire" : "175/65-14", "shop_id" : 7 }
+{ "_id" : { "$oid" : "548b704cb23207fb07e63bea" }, "quality" : "used", "quantity" : 500, "date" : "2014-12-12T22:40:23.336Z", "tire" : "175/65-14", "shop_id" : 7 }
+{ "_id" : { "$oid" : "5494883db232079265e9b9d9" }, "tire" : "185/50-14", "quality" : "new", "quantity" : 28, "shop_id" : 7 }
+{ "_id" : { "$oid" : "54cbc3d1b23207956d42ae10" }, "quality" : "used", "quantity" : 10, "date" : "2015-01-30T17:40:29.458Z", "tire" : "175/40-14", "shop_id" : 7 }
+{ "_id" : { "$oid" : "54e799b5b232072345584c21" }, "tire" : "195/55-16", "quality" : "used", "quantity" : 30, "shop_id" : 5 }
+{ "_id" : { "$oid" : "54e799cdb232072245584c20" }, "tire" : "235/35-20", "quality" : "new", "quantity" : 10, "shop_id" : 5 }
+{ "_id" : { "$oid" : "54ea1b35b232072a7ea56049" }, "tire" : "205/45-17", "quality" : "used", "quantity" : 10, "shop_id" : 5 }
+{ "_id" : { "$oid" : "5561dd59b23207ec6530570a" }, "quality" : "new", "quantity" : 20, "date" : "2015-05-24T14:06:23.750Z", "tire" : "165/45-14", "shop_id" : 7 }
+{ "_id" : { "$oid" : "55842de5b232072657e0bdb1" }, "tire" : "235/30-19", "quality" : "used", "quantity" : 20, "shop_id" : 7 }
+{ "_id" : { "$oid" : "55897e16b232079a678e06e7" }, "tire" : "185/55-15", "quality" : "used", "quantity" : 20, "shop_id" : 7 }
+{ "_id" : { "$oid" : "55905e1bb232074a1714d40e" }, "tire" : "175/65-14", "quality" : "new", "quantity" : 20, "shop_id" : 7 }
+{ "_id" : { "$oid" : "559304c2b232074b1714d40e" }, "quality" : "new", "quantity" : 5, "date" : "2015-06-30T20:54:39.719Z", "tire" : "165/40-14", "shop_id" : 7 }
+{ "_id" : { "$oid" : "55930550b23207db1714d40e" }, "quality" : "used", "quantity" : 20, "date" : "2015-06-30T20:56:59.088Z", "tire" : "165/65-14", "shop_id" : 7 }
+{ "_id" : { "$oid" : "55932e07b23207481714d40f" }, "quality" : "used", "quantity" : 35, "date" : "2015-06-30T23:50:41.554Z", "tire" : "345/85-23", "shop_id" : 7 }
+{ "_id" : { "$oid" : "55932e0bb232070f3014d40e" }, "quality" : "new", "quantity" : 22, "date" : "2015-06-30T23:50:46.115Z", "tire" : "345/85-23", "shop_id" : 7 }
+{ "_id" : { "$oid" : "559f356db232079967b0b2cd" }, "quality" : "used", "quantity" : 38, "date" : "2015-07-10T02:49:13.345Z", "tire" : "165/40-13", "shop_id" : 7 }
+{ "_id" : { "$oid" : "559f3574b232077567b0b2cd" }, "quality" : "new", "quantity" : 31111, "date" : "2015-07-10T02:49:20.087Z", "tire" : "165/40-13", "shop_id" : 7 }
+{ "_id" : { "$oid" : "559f3590b232077267b0b2cd" }, "quality" : "new", "quantity" : 1, "date" : "2015-07-10T02:49:47.537Z", "tire" : "165/40-13", "shop_id" : 7 }
+{ "_id" : { "$oid" : "559f3594b232077367b0b2cd" }, "quality" : "used", "quantity" : 2, "date" : "2015-07-10T02:49:51.795Z", "tire" : "165/40-13", "shop_id" : 7 }
+{ "_id" : { "$oid" : "559f35bbb232079f73b0b2cd" }, "quality" : "used", "quantity" : 1, "date" : "2015-07-10T02:50:30.574Z", "tire" : "165/40-23", "shop_id" : 7 }
+{ "_id" : { "$oid" : "559f35c1b232079967b0b2ce" }, "quality" : "new", "quantity" : 2, "date" : "2015-07-10T02:50:37.005Z", "tire" : "165/40-23", "shop_id" : 7 }

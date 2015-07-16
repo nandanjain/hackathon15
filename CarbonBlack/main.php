@@ -5,7 +5,7 @@
  * Date: 7/6/15
  * Time: 11:35 AM
  */
-
+include("MongoDBClient.php");
 if (PHP_SESSION_NONE == session_status()) {
     error_log("main.php - Session is not available --- Start a new one !!!");
     session_start(); // Starting Session

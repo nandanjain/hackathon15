@@ -31,7 +31,6 @@ if (isset($_POST['submit'])) {
         error_log($password);
         // check if e-mail address syntax is valid or not
         $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-        error_log("9999999999999999999999999 : " . $email);
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             echo "EMAIL.INVALID";
         } else {

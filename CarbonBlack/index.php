@@ -5,6 +5,7 @@
  * Date: 7/6/15
  * Time: 11:31 AM
  */
+include('MongoDBClient.php');
 include('login.php'); // Includes Login Script
 if(isset($_SESSION['login_user'])){
     error_log("index.php - session is set ... now redirecting to main.php");

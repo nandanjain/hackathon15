@@ -79,7 +79,6 @@ if (isset($_SESSION['login_user']) && isset($_SESSION['login_shop_id'])) {
             <span>{{record.quantity}}</span>
         </li>
     </ul>
-    //
 </div>
 </body>
 </html>

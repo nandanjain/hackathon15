@@ -1,128 +1,152 @@
 /*h2{*/
-    /*text-align: center;*/
-    /*font-size: 24px;*/
+/*text-align: center;*/
+/*font-size: 24px;*/
 /*}*/
 /*hr{*/
-    /*margin-bottom: 30px;*/
+/*margin-bottom: 30px;*/
 /*}*/
 /*div.container{*/
-    /*width: 960px;*/
-    /*height: 610px;*/
-    /*margin:50px auto;*/
-    /*font-family: 'Droid Serif', serif;*/
-    /*position:relative;*/
+/*width: 960px;*/
+/*height: 610px;*/
+/*margin:50px auto;*/
+/*font-family: 'Droid Serif', serif;*/
+/*position:relative;*/
 /*}*/
 /*div.main{*/
-    /*width: 320px;*/
-    /*margin-top: 80px;*/
-    /*float:left;*/
-    /*padding: 10px 55px 40px;*/
-    /*background-color: rgba(187, 255, 184, 0.65);*/
-    /*border: 15px solid white;*/
-    /*box-shadow: 0 0 10px;*/
-    /*border-radius: 2px;*/
-    /*font-size: 13px;*/
+/*width: 320px;*/
+/*margin-top: 80px;*/
+/*float:left;*/
+/*padding: 10px 55px 40px;*/
+/*background-color: rgba(187, 255, 184, 0.65);*/
+/*border: 15px solid white;*/
+/*box-shadow: 0 0 10px;*/
+/*border-radius: 2px;*/
+/*font-size: 13px;*/
 /*}*/
 /*input[type=text],[type=password] {*/
-    /*width: 97.7%;*/
-    /*height: 34px;*/
-    /*padding-left: 5px;*/
-    /*margin-bottom: 20px;*/
-    /*margin-top: 8px;*/
-    /*box-shadow: 0 0 5px #00F5FF;*/
-    /*border: 2px solid #00F5FF;*/
-    /*color: #4f4f4f;*/
-    /*font-size: 16px;*/
+/*width: 97.7%;*/
+/*height: 34px;*/
+/*padding-left: 5px;*/
+/*margin-bottom: 20px;*/
+/*margin-top: 8px;*/
+/*box-shadow: 0 0 5px #00F5FF;*/
+/*border: 2px solid #00F5FF;*/
+/*color: #4f4f4f;*/
+/*font-size: 16px;*/
 /*}*/
 /*label{*/
-    /*color: #464646;*/
-    /*text-shadow: 0 1px 0 #fff;*/
-    /*font-size: 14px;*/
-    /*font-weight: bold;*/
+/*color: #464646;*/
+/*text-shadow: 0 1px 0 #fff;*/
+/*font-size: 14px;*/
+/*font-weight: bold;*/
 /*}*/
 /*#login {*/
-    /*width: 100%;*/
-    /*background: linear-gradient(#22abe9 5%, #36caf0 100%);*/
-    /*border: 1px solid #0F799E;*/
-    /*font-size: 20px;*/
-    /*margin-top: 15px;*/
-    /*padding: 8px;*/
-    /*font-weight: bold;*/
-    /*cursor: pointer;*/
-    /*color: white;*/
-    /*text-shadow: 0px 1px 0px #13506D;*/
+/*width: 100%;*/
+/*background: linear-gradient(#22abe9 5%, #36caf0 100%);*/
+/*border: 1px solid #0F799E;*/
+/*font-size: 20px;*/
+/*margin-top: 15px;*/
+/*padding: 8px;*/
+/*font-weight: bold;*/
+/*cursor: pointer;*/
+/*color: white;*/
+/*text-shadow: 0px 1px 0px #13506D;*/
 /*}*/
 /*#login:hover{*/
-    /*background: linear-gradient(#36caf0 5%, #22abe9 100%);*/
+/*background: linear-gradient(#36caf0 5%, #22abe9 100%);*/
 /*}*/
 
-
-
 #main {
-    width:960px;
-    margin:50px auto;
-    font-family:raleway
+    width: 960px;
+    margin: 50px auto;
+    font-family: raleway
 }
+
 span {
-    color:red
+    color: red
 }
+
 h2 {
-    background-color:#FEFFED;
-    text-align:center;
-    border-radius:10px 10px 0 0;
-    margin:-10px -40px;
-    padding:15px
+    background-color: #FEFFED;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+    margin: -10px -40px;
+    padding: 15px
 }
+
 hr {
-    border:0;
-    border-bottom:1px solid #ccc;
-    margin:10px -40px;
-    margin-bottom:30px
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    margin: 10px -40px;
+    margin-bottom: 30px
 }
+
 #login {
-    width:300px;
-    float:left;
-    border-radius:10px;
-    font-family:raleway;
-    border:2px solid #ccc;
-    padding:10px 40px 25px;
-    margin-top:70px
+    width: 300px;
+    float: left;
+    border-radius: 10px;
+    font-family: raleway;
+    border: 2px solid #ccc;
+    padding: 10px 40px 25px;
+    margin-top: 70px
 }
-input[type=text],input[type=password] {
-    width:99.5%;
-    padding:10px;
-    margin-top:8px;
-    border:1px solid #ccc;
-    padding-left:5px;
-    font-size:16px;
-    font-family:raleway
+
+input[type=text], input[type=password] {
+    width: 99.5%;
+    padding: 10px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    padding-left: 5px;
+    font-size: 16px;
+    font-family: raleway
 }
+
 input[type=submit] {
-    width:100%;
-    background-color:#FFBC00;
-    color:#fff;
-    border:2px solid #FFCB00;
-    padding:10px;
-    font-size:20px;
-    cursor:pointer;
-    border-radius:5px;
-    margin-bottom:15px
+    width: 100%;
+    background-color: #FFBC00;
+    color: #fff;
+    border: 2px solid #FFCB00;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 15px
 }
+
 #profile {
-    padding:50px;
-    border:1px dashed grey;
-    font-size:20px;
-    background-color:#DCE6F7
+    padding: 50px;
+    border: 1px dashed grey;
+    font-size: 20px;
+    background-color: #DCE6F7
 }
+
 #logout {
-    float:right;
-    padding:5px;
-    border:dashed 1px gray
+    float: right;
+    padding: 5px;
+    border: dashed 1px gray
 }
+
 a {
-    text-decoration:none;
-    color:#6495ed
+    text-decoration: none;
+    color: #6495ed
 }
+
 i {
-    color:#6495ed
+    color: #6495ed
+}
+
+.history_table, .inventory_table, .sales_table {
+    border: 5px dashed black;
+}
+
+.history_table {
+    background-color: #FFCB00;
+}
+
+.inventory_table {
+    background-color: aquamarine;
+}
+
+.history_table {
+    background-color: greenyellow;
 }

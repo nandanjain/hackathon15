@@ -17,30 +17,22 @@ if (isset($_POST['submit'])) {
     if (empty($_POST['email']) || empty($_POST['password'])) {
         $error = "Email or Password is invalid";
     } else {
-        // connect
-        $m = new MongoClient();
-        // select a database
-        $db = $m->tires;
-        $collection = $db->users;
-
         $email = $_POST['email']; // Fetching Values from URL.
         //$password = sha1($_POST['password']); // Password Encryption, If you like you can also leave sha1.
         $password = $_POST['password'];
 
-        error_log($email);
-        error_log($password);
         // check if e-mail address syntax is valid or not
         $email = filter_var($email, FILTER_SANITIZE_EMAIL);
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             echo "EMAIL.INVALID";
         } else {
             // Matching user input email and password with stored email and password in database.
-            $cursor = $collection->findOne(array('email' => $email, 'password' => $password));
-
-            if ($cursor == NULL) {
+            $shopId = $MONGO_DB->validateCredentials($email, $password);
+            if ($shopId == false) {
                 echo "LOGIN.FAILURE";
             } else {
                 $_SESSION['login_user'] = $email;
+                $_SESSION['login_shop_id'] = $shopId;
             }
         }
     }

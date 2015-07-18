@@ -30,12 +30,21 @@ class MongoDBClient
 
     function validateCredentials($email, $password)
     {
-        $cursor = $this->db->users->findOne(array('username' => $email, 'password' => $password));
+        $cursor = $this->db->users->find(array('email' => $email, 'password' => $password));
+        $cursor->fields(array("shop_id" => true));
         if ($cursor == NULL) {
             return false;
         } else {
-            return true;
+            $shop_id = $cursor->getNext()['shop_id'];
+            return $shop_id;
         }
+    }
+
+    function getShopDetails($shop_id)
+    {
+        $cursor = $this->db->shops->find(array('shop_id' => $shop_id));
+        $shopJson = json_encode(iterator_to_array($cursor));
+        return $shopJson;
     }
 
     function getSales($shop_id)
@@ -43,6 +52,20 @@ class MongoDBClient
         $cursor = $this->db->sales->find(array('shop_id' => $shop_id));
         $salesJson = json_encode(iterator_to_array($cursor));
         return $salesJson;
+    }
+
+    function getInventory($shop_id)
+    {
+        $cursor = $this->db->inventory->find(array('shop_id' => $shop_id));
+        $inventoryJson = json_encode(iterator_to_array($cursor));
+        return $inventoryJson;
+    }
+
+    function getHistory($shop_id)
+    {
+        $cursor = $this->db->history->find(array('shop_id' => $shop_id));
+        $historyJson = json_encode(iterator_to_array($cursor));
+        return $historyJson;
     }
 
     function __destruct()

@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
         // connect
         $m = new MongoClient();
         // select a database
-        $db = $m->test;
+        $db = $m->tires;
         $collection = $db->users;
 
         $email = $_POST['email']; // Fetching Values from URL.
@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
             echo "EMAIL.INVALID";
         } else {
             // Matching user input email and password with stored email and password in database.
-            $cursor = $collection->findOne(array('username' => $email, 'password' => $password));
+            $cursor = $collection->findOne(array('email' => $email, 'password' => $password));
 
             if ($cursor == NULL) {
                 echo "LOGIN.FAILURE";

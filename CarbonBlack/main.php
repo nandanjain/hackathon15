@@ -25,18 +25,23 @@ if (isset($_SESSION['login_user'])) {
 <head>
     <title>Your Home Page</title>
     <link href="css/login.css" rel="stylesheet" type="text/css">
-    <script type="javascript" src="lib/angular.min.js"></script>
+    <script type="text/javascript" src="lib/angular.min.js"></script>
+    <script type="text/javascript" src="js/sales.js"></script>
 </head>
-<body>
+<body ng-app="SalesModule">
 <div id="profile">
     <b id="welcome">Welcome : <i><?php echo $login_session; ?></i></b>
     <b id="logout"><a href="logout.php">Log Out</a></b>
 </div>
+<?php $sales_data = $MONGO_DB->getSales(7); ?>
+<script type="text/javascript">
+    var sale = <?php echo $sales_data;?>;
+</script>
 <div class="sales_table" ng-controller="SalesController as sales">
     <ul id="salesTable">
-        <li ng-repeat="record in sales.records">
+        <li ng-repeat="record in sales.records | orderBy : date : reverse">
             <span>{{record.date | date}}</span>
-            <span>{{record.saleDetails}}</span>
+            <span>{{record.cash| currency}}</span>
             <span>{{record.total | currency}}</span>
             <span>{{record.state}}</span>
         </li>

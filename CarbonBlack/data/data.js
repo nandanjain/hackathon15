@@ -8,19 +8,41 @@ var sales = {
         "date": "2014-07-10T22:53:53.471Z",
         "tires": [],
         "cash": "10",
-        "services": [{"name": "Mounting", "price": 8, "quantity": 1, "checked": true}, {
-            "name": "Balancing",
-            "price": 10,
-            "quantity": 1,
-            "checked": false
-        }, {"name": "Repair", "price": 10, "quantity": 1, "checked": false}, {
-            "name": "Rotation",
-            "price": 10,
-            "quantity": 1,
-            "checked": false
-        }],
-        "discount": {"amount": 0, "checked": true},
-        "tax": {"rate": 6, "amount": 0.48, "checked": true},
+        "services": [
+            {
+                "name": "Mounting",
+                "price": 8,
+                "quantity": 1,
+                "checked": true
+            },
+            {
+                "name": "Balancing",
+                "price": 10,
+                "quantity": 1,
+                "checked": false
+            },
+            {
+                "name": "Repair",
+                "price": 10,
+                "quantity": 1,
+                "checked": false
+            },
+            {
+                "name": "Rotation",
+                "price": 10,
+                "quantity": 1,
+                "checked": false
+            }
+        ],
+        "discount": {
+            "amount": 0,
+            "checked": true
+        },
+        "tax": {
+            "rate": 6,
+            "amount": 0.48,
+            "checked": true
+        },
         "total": 8.48,
         "synced": false,
         "shop_id": 7
@@ -29,21 +51,50 @@ var sales = {
         "_id": {"$id": "53bf1a60b23207746807aa15"},
         "state": "cancel",
         "date": "2014-07-11T01:35:21.029Z",
-        "tires": [{"tire": "175\/65-14", "quality": "new", "quantity": 1, "price": 40, "checked": true}],
+        "tires": [
+            {
+                "tire": "175\/65-14",
+                "quality": "new",
+                "quantity": 1,
+                "price": 40,
+                "checked": true
+            }
+        ],
         "cash": 0,
-        "services": [{"name": "Mounting", "price": 8, "quantity": 1, "checked": true}, {
-            "name": "Balancing",
-            "price": 10,
-            "quantity": 1,
+        "services": [
+            {
+                "name": "Mounting",
+                "price": 8,
+                "quantity": 1,
+                "checked": true
+            },
+            {
+                "name": "Balancing",
+                "price": 10,
+                "quantity": 1,
+                "checked": true
+            }, {
+                "name": "Repair",
+                "price": 10,
+                "quantity": 1,
+                "checked": true
+            },
+            {
+                "name": "Rotation",
+                "price": 10,
+                "quantity": 1,
+                "checked": true
+            }
+        ],
+        "discount": {
+            "amount": 0,
             "checked": true
-        }, {"name": "Repair", "price": 10, "quantity": 1, "checked": true}, {
-            "name": "Rotation",
-            "price": 10,
-            "quantity": 1,
+        },
+        "tax": {
+            "rate": 6,
+            "amount": 4.68,
             "checked": true
-        }],
-        "discount": {"amount": 0, "checked": true},
-        "tax": {"rate": 6, "amount": 4.68, "checked": true},
+        },
         "total": 82.68,
         "shop_id": 7
     }

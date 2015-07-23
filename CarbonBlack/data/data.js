@@ -1,8 +1,8 @@
 /**
  * Created by Nandy on 7/11/15.
  */
-var sales = {
-    "53bf19feb23207736807aa15": {
+var sales = [
+    {
         "_id": {"$id": "53bf19feb23207736807aa15"},
         "state": "final",
         "date": "2014-07-10T22:53:53.471Z",
@@ -47,10 +47,10 @@ var sales = {
         "synced": false,
         "shop_id": 7
     },
-    "53bf1a60b23207746807aa15": {
+    {
         "_id": {"$id": "53bf1a60b23207746807aa15"},
         "state": "cancel",
-        "date": "2014-07-11T01:35:21.029Z",
+        "date": "2015-07-11T01:35:21.029Z",
         "tires": [
             {
                 "tire": "175\/65-14",
@@ -98,7 +98,7 @@ var sales = {
         "total": 82.68,
         "shop_id": 7
     }
-};
+];
 var inventory = {
     "_id": ObjectId("539261abb23207697a6f86cb"),
     "tire": "255/25-13",

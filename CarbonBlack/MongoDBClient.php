@@ -49,6 +49,7 @@ class MongoDBClient
 
     function getSales($shop_id)
     {
+        // Convert the Object to arrary for Angular filters to work.
         $cursor = $this->db->sales->find(array('shop_id' => $shop_id));
         $salesJson = json_encode(iterator_to_array($cursor));
         return $salesJson;
@@ -56,6 +57,7 @@ class MongoDBClient
 
     function getInventory($shop_id)
     {
+        // Convert the Object to arrary for Angular filters to work.
         $cursor = $this->db->inventory->find(array('shop_id' => $shop_id));
         $inventoryJson = json_encode(iterator_to_array($cursor));
         return $inventoryJson;
@@ -63,6 +65,7 @@ class MongoDBClient
 
     function getHistory($shop_id)
     {
+        // Convert the Object to arrary for Angular filters to work.
         $cursor = $this->db->history->find(array('shop_id' => $shop_id));
         $historyJson = json_encode(iterator_to_array($cursor));
         return $historyJson;

@@ -1,3 +1,7 @@
+body {
+    font-family: monospace;
+}
+
 #main {
     width: 960px;
     margin: 50px auto;
@@ -96,20 +100,33 @@ i {
     /*background-color: greenyellow;*/
 }
 
-.salesTable > span {
-
+li {
+    display: inline-block;
 }
 
-td:first-child {
-    border-left: 1px solid black;
+li:hover {
+    background-color: aquamarine;
 }
 
-td:last-child {
-    border-right: 1px solid black;
+li.active {
+    font-weight: bold;
 }
 
-td {
+table {
+    border: 1px solid black;
+}
+
+thead tr {
+    background-color: rgba(134, 133, 128, 0.73);
+}
+
+th, td {
     padding: 0px 10px 0px 10px;
-    text-align: center;
-    border-bottom: 1px solid black;
+    /*text-align: center;*/
+    border: 1px solid black;
+    white-space: nowrap;
+}
+
+tr:hover {
+    background-color: rgba(134, 133, 128, 0.30);
 }

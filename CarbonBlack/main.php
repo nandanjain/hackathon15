@@ -30,6 +30,7 @@ if (isset($_SESSION['login_user']) && isset($_SESSION['login_shop_id'])) {
 <head>
     <title>Your Home Page</title>
     <link href="css/login.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="data/data.js"></script>
 </head>
 <body ng-app="SalesModule">
 <div id="profile">
@@ -55,7 +56,7 @@ if (isset($_SESSION['login_user']) && isset($_SESSION['login_shop_id'])) {
             var sale = <?php echo $sales_data;?>;
         </script>
 
-        <table id="salesTable">
+        <table id="salesTable" cellspacing="0">
             <thead>
             <tr>
                 <th>Date</th>
@@ -66,7 +67,7 @@ if (isset($_SESSION['login_user']) && isset($_SESSION['login_shop_id'])) {
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="record in salesCtrl.records">
+            <tr ng-repeat="record in salesCtrl.records | orderBy: 'date'">
                 <td>{{record.date | date}}</td>
                 <td>{{salesCtrl.populateTiresData(record)}}</td>
                 <td>{{salesCtrl.populateServicesData(record)}}</td>
@@ -82,7 +83,7 @@ if (isset($_SESSION['login_user']) && isset($_SESSION['login_shop_id'])) {
             var inventory = <?php echo $inventory_data;?>;
         </script>
 
-        <table id="inventoryTable">
+        <table id="inventoryTable" cellspacing="0">
             <thead>
             <tr>
                 <th>Tire</th>
@@ -91,7 +92,7 @@ if (isset($_SESSION['login_user']) && isset($_SESSION['login_shop_id'])) {
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="record in inventoryCtrl.records">
+            <tr ng-repeat="record in inventoryCtrl.records | orderBy: 'quantity'">
                 <td>{{record.tire}}</td>
                 <td>{{record.quality}}</td>
                 <td>{{record.quantity}}</td>
@@ -104,7 +105,7 @@ if (isset($_SESSION['login_user']) && isset($_SESSION['login_shop_id'])) {
             var historyData = <?php echo $history_data;?>;
         </script>
 
-        <table id="historyTable">
+        <table id="historyTable" cellspacing="0">
             <thead>
             <tr>
                 <th>Date</th>

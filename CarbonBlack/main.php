@@ -29,7 +29,7 @@ if (isset($_SESSION['login_user']) && isset($_SESSION['login_shop_id'])) {
 ?>
 <head>
     <title>Your Home Page</title>
-    <link href="css/login.css" rel="stylesheet" type="text/css">
+    <link href="css/main.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="data/data.js"></script>
 </head>
 <body ng-app="SalesModule">
@@ -37,7 +37,7 @@ if (isset($_SESSION['login_user']) && isset($_SESSION['login_shop_id'])) {
     <b id="welcome">Welcome : <i><?php echo $login_session; ?></i></b>
     <b id="logout"><a href="logout.php">Log Out</a></b>
 </div>
-<div ng-controller="TabController as tabCtrl">
+<div id="main_body" ng-controller="TabController as tabCtrl">
     <div id="side_panel">
         <ul class="side_menu">
             <li ng-class="{ active:tabCtrl.isSet(1) }">
@@ -67,7 +67,8 @@ if (isset($_SESSION['login_user']) && isset($_SESSION['login_shop_id'])) {
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="record in salesCtrl.records | orderBy: 'date'">
+            <tr ng-repeat="record in salesCtrl.records | orderBy: 'date'" ng-class-even="'even_row'"
+                ng-class-odd="'odd_row'">
                 <td>{{record.date | date}}</td>
                 <td>{{salesCtrl.populateTiresData(record)}}</td>
                 <td>{{salesCtrl.populateServicesData(record)}}</td>
@@ -92,7 +93,8 @@ if (isset($_SESSION['login_user']) && isset($_SESSION['login_shop_id'])) {
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="record in inventoryCtrl.records | orderBy: 'quantity'">
+            <tr ng-repeat="record in inventoryCtrl.records | orderBy: 'quantity'" ng-class-even="'even_row'"
+                ng-class-odd="'odd_row'">
                 <td>{{record.tire}}</td>
                 <td>{{record.quality}}</td>
                 <td>{{record.quantity}}</td>
@@ -115,7 +117,7 @@ if (isset($_SESSION['login_user']) && isset($_SESSION['login_shop_id'])) {
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="record in historyCtrl.records">
+            <tr ng-repeat="record in historyCtrl.records" ng-class-even="'even_row'" ng-class-odd="'odd_row'">
                 <td>{{record.date | date}}</td>
                 <td>{{record.tire}}</td>
                 <td>{{record.quality}}</td>

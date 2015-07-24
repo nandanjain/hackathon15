@@ -1,0 +1,136 @@
+/* MAIN Page */
+body {
+    font-family: monospace;
+    font-size: 1rem;
+    background: url("../images/carbon_tire_pics.png");
+}
+
+div#profile {
+    padding: 1rem 0rem 3rem 0rem;
+    margin: auto;
+    width: 95%;
+    font-size: 1.5rem;
+    background-color: rgba(100, 100, 100, 0.8);
+}
+
+b#welcome,
+b#logout {
+    padding: 0.3rem;
+    font-weight: normal;
+}
+
+b#welcome {
+    margin-left: 0.5rem;
+    float: left;
+}
+
+b#logout {
+    margin-right: 1rem;
+    float: right;
+    border: 1px solid;
+    border-radius: 5px;
+    background-color: rgba(100, 100, 100, 1);
+}
+
+a {
+    text-decoration: none;
+    color: #6495ed
+}
+
+div#profile > i {
+    color: #6495ed
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+div#main_body {
+    height: 100%;
+    width: 95%;
+    padding-top: 0.5rem;
+    margin: auto;
+    background-color: rgba(60, 60, 60, 0.7);
+    min-height: 100%;
+}
+
+div#side_panel {
+    /* display: none; */
+    margin: auto;
+}
+
+ul.side_menu {
+    /* padding-top: 1.3rem; */
+    padding: 0px;
+    width: 31rem;
+    margin: 2rem auto 1rem auto;;
+}
+
+ul.side_menu > li {
+    height: 2.3rem;
+    width: auto;
+    border: 1px solid;
+    font-size: 1.8rem;
+    text-align: center;
+    border-radius: 9px;
+    overflow: hidden;
+}
+
+ul.side_menu > li > a {
+    padding: 0rem 1rem 0.25rem 1rem;
+}
+
+ul.side_menu > li.active {
+    background-color: #6495ed;
+}
+
+ul.side_menu > li.active > a {
+    color: whitesmoke;
+    text-decoration: underline;
+    font-weight: normal;
+}
+
+.history_table, .inventory_table, .sales_table {
+    /* margin: auto; */
+    /* display: inline; */
+}
+
+li {
+    display: inline-block;
+}
+
+tbody > tr:hover,
+#logout:hover,
+li:hover {
+    color: white;
+    background-color: rgba(71, 70, 71, 0.6);
+}
+
+li.active {
+    font-weight: bold;
+}
+
+table {
+    border: 1px solid black;
+    margin: auto;
+}
+
+thead tr {
+    font-size: 1.1rem;
+    background-color: rgba(134, 133, 128, 0.73);
+}
+
+th, td {
+    padding: .3rem 1rem .3rem 1rem;
+    white-space: normal;
+    max-width: 10rem;
+    min-width: 1rem;
+}
+
+tr.even_row {
+    background-color: #DCE6F7;
+}
+
+tr.odd_row {
+    background-color: rgba(225, 225, 225, 0.6);
+}

@@ -15,21 +15,21 @@ if(isset($_SESSION['login_user'])){
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login Form in PHP</title>
+    <title>Carbon Black</title>
     <link href="css/login.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div id="main">
-    <h1>PHP Login Session Example</h1>
+    <h1>Carbon Black</h1>
     <div id="login">
-        <h2>Login Form</h2>
+        <h2>Login</h2>
         <form action="" method="post">
             <label>EMail :</label>
-            <input id="email" name="email" placeholder="email" type="text">
+            <input id="email" name="email" placeholder="email@server.com" type="text">
             <label>Password :</label>
             <input id="password" name="password" placeholder="**********" type="password">
             <input name="submit" type="submit" value=" Login ">
-            <span><?php echo $error; ?></span>
+            <span id="error_message"><?php echo $error; ?></span>
         </form>
     </div>
 </div>

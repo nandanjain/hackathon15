@@ -1,132 +1,78 @@
 body {
     font-family: monospace;
+    font-size: 1.8rem;
+    background: url("../images/carbon_tire_pics.png");
 }
 
+/* Login Page */
 #main {
-    width: 960px;
-    margin: 50px auto;
+    text-align: center;
 }
 
-span {
+span.error_message {
     color: red
 }
 
+h1 {
+    font-size: 5rem;
+    text-shadow: 0.3rem 0.3rem rgba(200, 200, 200, .5);
+}
+
 h2 {
-    background-color: #FEFFED;
     text-align: center;
     border-radius: 10px 10px 0 0;
     margin: -10px -40px;
     padding: 15px
 }
 
-hr {
-    border: 0;
-    border-bottom: 1px solid #ccc;
-    margin: 10px -40px;
-    margin-bottom: 30px
-}
-
 #login {
     width: 300px;
-    float: left;
     border-radius: 10px;
-    font-family: raleway;
     border: 2px solid #ccc;
-    padding: 10px 40px 25px;
-    margin-top: 70px
+    padding: 1rem 2rem;
+    margin: auto;
+    background-color: rgba(77, 77, 77, 0.7);
+}
+
+input {
+    font-size: 1rem;
+    padding: 0.5rem 0 0.5rem 0;
+    margin: 1rem 0;
 }
 
 input[type=text], input[type=password] {
     width: 99.5%;
-    padding: 10px;
-    margin-top: 8px;
-    border: 1px solid #ccc;
-    padding-left: 5px;
-    font-size: 16px;
-    font-family: raleway
+    background-color: rgba(255, 255, 255, 0.6);
 }
 
+input[type=text]:focus, input[type=password]:focus,
+input[type=text]:hover, input[type=password]:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
 input[type=submit] {
     width: 100%;
-    background-color: #FFBC00;
     color: #fff;
-    border: 2px solid #FFCB00;
     padding: 10px;
-    font-size: 20px;
     cursor: pointer;
     border-radius: 5px;
-    margin-bottom: 15px
+    margin-bottom: 15px;
+    background: rgba(77, 77, 77, 0.5);
 }
 
-#profile {
-    padding: 50px;
-    border: 1px dashed grey;
-    font-size: 20px;
-    background-color: #DCE6F7
+input[type=submit]:hover {
+    background: rgba(0, 0, 0, 0.5);
 }
 
-#logout {
-    float: right;
-    padding: 5px;
-    border: dashed 1px gray
+input::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, 0.6);
 }
 
-a {
-    text-decoration: none;
-    color: #6495ed
+/* Old Firefox below 18 */
+input:-moz-placeholder {
+    color: rgba(0, 0, 0, 0.6);
 }
 
-i {
-    color: #6495ed
-}
-
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-    display: none !important;
-}
-
-.history_table, .inventory_table, .sales_table {
-    /*border: 5px dashed black;*/
-}
-
-.history_table {
-    /*background-color: #FFCB00;*/
-}
-
-.inventory_table {
-    /*background-color: aquamarine;*/
-}
-
-.history_table {
-    /*background-color: greenyellow;*/
-}
-
-li {
-    display: inline-block;
-}
-
-li:hover {
-    background-color: aquamarine;
-}
-
-li.active {
-    font-weight: bold;
-}
-
-table {
-    border: 1px solid black;
-}
-
-thead tr {
-    background-color: rgba(134, 133, 128, 0.73);
-}
-
-th, td {
-    padding: 0px 10px 0px 10px;
-    /*text-align: center;*/
-    border: 1px solid black;
-    white-space: nowrap;
-}
-
-tr:hover {
-    background-color: rgba(134, 133, 128, 0.30);
+/* New Firefox */
+input::-moz-placeholder {
+    color: rgba(0, 0, 0, 0.6);
 }

@@ -134,3 +134,34 @@ tr.even_row {
 tr.odd_row {
     background-color: rgba(225, 225, 225, 0.6);
 }
+
+div#dash_board {
+    float: none;
+    margin: auto;
+    overflow: hidden;
+    display: inline;
+    border: 1px solid red;
+}
+
+div.daily_sale,
+div.monthly_sale {
+    font-size: 1.5rem;
+    display: inline;
+    margin: auto;
+}
+
+div.daily_sale table,
+div.monthly_sale table {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+div.daily_sale .dash_label,
+div.monthly_sale .dash_label {
+    border: 1px dotted;
+}
+
+div.daily_sale .dash_value,
+div.monthly_sale .dash_value {
+    border: 1px solid;
+    font-weight: bold;
+}

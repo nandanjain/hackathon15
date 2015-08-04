@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: Nandy
@@ -51,15 +50,64 @@ class MongoDBClient
     {
         // Convert the Object to arrary for Angular filters to work.
         $cursor = $this->db->sales->find(array('shop_id' => $shop_id));
+        $cursor->sort(array('date' => -1));
+
         $salesJson = json_encode(iterator_to_array($cursor));
         return $salesJson;
     }
 
+    function getSalesByDate($shop_id, $start_date, $end_date)
+    {
+        $cursor = $this->db->sales->find(array('shop_id' => $shop_id, 'state' => 'paid', '$and' => array(array('date' => array('$gt' => $start_date)), array('date' => array('$lt' => $end_date)))));
+        $salesJson = json_encode(iterator_to_array($cursor));
+        return $salesJson;
+    }
+
+    function getDailySalesByDate($shop_id)
+    {
+        $cursor = $this->db->sales->find(array('shop_id' => $shop_id, 'state' => 'paid'));
+        $cursor->sort(array('date' => -1));
+
+        foreach ($cursor as $c) {
+            $d = split('T', $c['date']);
+            if (!isset($data[$d[0]])) {
+                $data[$d[0]] = 0;
+            }
+            $services = 0.00;
+            foreach ($c['services'] as $s) {
+                $services += $s['price'] * $s['quantity'];
+            }
+            $tires = 0.00;
+            foreach ($c['tires'] as $t) {
+                $tires += $t['price'] * $t['quantity'];
+            }
+            $total = $services + $tires;
+            $data[$d[0]] += $total;
+        }
+    }
+
     function getInventory($shop_id)
     {
-        // Convert the Object to arrary for Angular filters to work.
+        // Convert the Object to array for Angular filters to work.
         $cursor = $this->db->inventory->find(array('shop_id' => $shop_id));
         $inventoryJson = json_encode(iterator_to_array($cursor));
+
+        return $inventoryJson;
+    }
+
+    function getInventoryByQuality($shop_id, $quality)
+    {
+        $cursor = $this->db->inventory->find(array('shop_id' => $shop_id, 'quality' => $quality));
+        $inventoryJson = json_encode(iterator_to_array($cursor));
+
+        return $inventoryJson;
+    }
+
+    function getInventoryByTire($shop_id, $tire)
+    {
+        $cursor = $this->db->inventory->find(array('shop_id' => $shop_id, 'tire' => $tire));
+        $inventoryJson = json_encode(iterator_to_array($cursor));
+
         return $inventoryJson;
     }
 
@@ -67,6 +115,13 @@ class MongoDBClient
     {
         // Convert the Object to arrary for Angular filters to work.
         $cursor = $this->db->history->find(array('shop_id' => $shop_id));
+        $historyJson = json_encode(iterator_to_array($cursor));
+        return $historyJson;
+    }
+
+    function getHistoryByDate($shop_id, $start_date, $end_date)
+    {
+        $cursor = $this->db->history->find(array('shop_id' => $shop_id, '$and' => array(array('date' => array('$gt' => $start_date)), array('date' => array('$lt' => $end_date)))));
         $historyJson = json_encode(iterator_to_array($cursor));
         return $historyJson;
     }

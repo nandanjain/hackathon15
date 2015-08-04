@@ -22,6 +22,15 @@ if (isset($_SESSION['login_user']) && isset($_SESSION['login_shop_id'])) {
     $sales_data = $MONGO_DB->getSales($shop_id);
     $inventory_data = $MONGO_DB->getInventory($shop_id);
     $history_data = $MONGO_DB->getHistory($shop_id);
+
+//    //Default time zone
+    date_default_timezone_set("America/New_York");
+    $today = date('Y-06-30');
+    $tomorrow = date('Y-07-01');
+    $monthStart = date('Y-06-01');
+    error_log("===========================Today: " . $today . " :Tomorrow: " . $tomorrow . " :Start of Month: " . $monthStart);
+    $todaysSale = $MONGO_DB->getSalesByDate($shop_id, $today, $tomorrow);
+    $monthlySale = $MONGO_DB->getSalesByDate($shop_id, $monthStart, $tomorrow);
 } else {
     error_log("main.php - session is NOT set !!!");
     header('Location: index.php'); // Redirecting To Home Page
@@ -50,6 +59,50 @@ if (isset($_SESSION['login_user']) && isset($_SESSION['login_shop_id'])) {
                 <a href ng-click="tabCtrl.setTab(3)">History</a>
             </li>
         </ul>
+    </div>
+    <div id="dash_board" ng-cloak ng-show="tabCtrl.isSet(0)" ng-controller="DashboardController as dashCtrl">
+        <script type="text/javascript">
+            var dailySales = <?php echo $todaysSale; ?>;
+            var monthlySales = <?php echo $monthlySale; ?>;
+        </script>
+        <div class="daily_sale">
+            <table>
+                <tr>
+                    <th colspan="2">Today's Summary</th>
+                </tr>
+                <tr>
+                    <td class="dash_label">Tires</td>
+                    <td class="dash_value">{{dashCtrl.todaysSalesSummary.noOfTires}}</td>
+                </tr>
+                <tr>
+                    <td class="dash_label">Services</td>
+                    <td class="dash_value">{{dashCtrl.todaysSalesSummary.noOfServices}}</td>
+                </tr>
+                <tr>
+                    <td class="dash_label">Amount</td>
+                    <td class="dash_value">${{dashCtrl.todaysSalesSummary.totalCost}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="monthly_sale">
+            <table>
+                <tr>
+                    <th colspan="2">Month's Summary</th>
+                </tr>
+                <tr>
+                    <td class="dash_label">Tires</td>
+                    <td class="dash_value">{{dashCtrl.monthlySalesSummary.noOfTires}}</td>
+                </tr>
+                <tr>
+                    <td class="dash_label">Services</td>
+                    <td class="dash_value">{{dashCtrl.monthlySalesSummary.noOfServices}}</td>
+                </tr>
+                <tr>
+                    <td class="dash_label">Amount</td>
+                    <td class="dash_value">${{dashCtrl.monthlySalesSummary.totalCost}}</td>
+                </tr>
+            </table>
+        </div>
     </div>
     <div class="sales_table" ng-show="tabCtrl.isSet(1)" ng-cloak ng-controller="SalesController as salesCtrl">
         <script type="text/javascript">

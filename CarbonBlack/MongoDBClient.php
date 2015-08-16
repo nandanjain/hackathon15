@@ -58,6 +58,48 @@ class MongoDBClient
 
     function getSalesByDate($shop_id, $start_date, $end_date)
     {
+        error_log("MONGODBClient : GetSalesByDate: " . $shop_id . " : Start : " . $start_date . " : End : " . $end_date);
+        $cursor = $this->db->sales->find(array('shop_id' => $shop_id, 'state' => 'paid', '$and' => array(array('date' => array('$gte' => $start_date)), array('date' => array('$lt' => $end_date)))));
+        $salesJson = json_encode(iterator_to_array($cursor));
+        error_log("MONGODBClient : GetSalesByDate: " . $salesJson);
+
+        $data[] = array('Date', 'Tires', 'Tires Quantity', 'Tire Amount', 'Services', 'Services Amount', 'Total');
+        foreach ($cursor as $item) {
+            $date = split('T', $item['date'])[0];
+
+            $servicesCost = 0.00;
+            $services = '';
+            foreach ($item['services'] as $s) {
+                $services = $services . $s['name'] . ' ';
+                $servicesCost += $s['price'] * $s['quantity'];
+            }
+
+            $tires = '';
+            $tiresQuantity = 0;
+            $tiresCost = 0.00;
+            foreach ($item['tires'] as $t) {
+                $tires = $tires . $t['quality'] . '-' . $t['tire'] . ' ';
+                $tiresQuantity += $t['quantity'];
+                $tiresCost += $t['price'] * $t['quantity'];
+            }
+            $total = $servicesCost + $tiresCost;
+            $data[] = array($date, $tires, $tiresQuantity, $tiresCost, $services, $servicesCost, $total);
+        }
+
+        return $data;
+    }
+
+    function getSalesForMonthGraph($shop_id)
+    {
+        date_default_timezone_set("America/New_York");
+
+        $thisMonthStart = date('Y-m-01');
+        $thisMonthEnd = date('Y-m-d');
+        $this->getSalesByDate($shop_id);
+
+        $lastMonthStart = date('Y-06-30');
+        $lastMonthStart = date('Y-06-30');
+
         $cursor = $this->db->sales->find(array('shop_id' => $shop_id, 'state' => 'paid', '$and' => array(array('date' => array('$gt' => $start_date)), array('date' => array('$lt' => $end_date)))));
         $salesJson = json_encode(iterator_to_array($cursor));
         return $salesJson;

@@ -1,7 +1,7 @@
 /* MAIN Page */
 body {
     font-family: monospace;
-    font-size: 1rem;
+    font-size: 1.2rem;
     background: url("../images/carbon_tire_pics.png");
 }
 
@@ -62,7 +62,7 @@ div#side_panel {
 ul.side_menu {
     /* padding-top: 1.3rem; */
     padding: 0px;
-    width: 31rem;
+    width: 41rem;
     margin: 2rem auto 1rem auto;;
 }
 
@@ -140,7 +140,6 @@ div#dash_board {
     margin: auto;
     overflow: hidden;
     display: inline;
-    border: 1px solid red;
 }
 
 div.daily_sale,
@@ -164,4 +163,43 @@ div.daily_sale .dash_value,
 div.monthly_sale .dash_value {
     border: 1px solid;
     font-weight: bold;
+}
+
+div.reports_table {
+    width: 100%;
+}
+
+div.reports_table div {
+    float: none;
+    margin: auto;
+    width: 30rem;
+}
+
+select#month_select {
+    float: none;
+    margin: auto;
+    font-size: 1.1rem;
+    color: white;
+    background-color: black;
+}
+
+label#month_label {
+    font-size: 2rem;
+}
+
+a#download_report {
+    font-size: 1.5rem;
+    color: white;
+}
+
+a#download_report.disabled:hover,
+a#download_report.disabled {
+    color: gray;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+a#download_report:hover {
+    font-size: 1.6rem;
+    text-decoration: underline;
 }

@@ -15,32 +15,20 @@
             totalCost: 0
         };
 
-        for (var x in dailySales) {
-            var sale = dailySales[x];
-            for (var idx = 0; idx < sale.tires.length; idx++) {
-                var tire = sale.tires[idx];
-                this.todaysSalesSummary.noOfTires += tire.quantity;
-                this.todaysSalesSummary.totalCost += tire.quantity * tire.price;
-            }
-            for (var idx = 0; idx < sale.services.length; idx++) {
-                var service = sale.services[idx];
-                this.todaysSalesSummary.noOfServices += service.quantity;
-                this.todaysSalesSummary.totalCost += service.quantity * service.price;
-            }
+        for (var x = 1; x < dailySales.length; x++) {
+            var sale = dailySales[x].splice(",");
+            this.todaysSalesSummary.noOfTires += sale[2];
+            this.todaysSalesSummary.noOfServices += sale[4] ? sale[4].split(' ').length - 1 : 0;
+            this.todaysSalesSummary.totalCost += sale[6];
         }
 
-        for (var x in monthlySales) {
-            var sale = monthlySales[x];
-            for (var idx = 0; idx < sale.tires.length; idx++) {
-                var tire = sale.tires[idx];
-                this.monthlySalesSummary.noOfTires += tire.quantity;
-                this.monthlySalesSummary.totalCost += tire.quantity * tire.price;
-            }
-            for (var idx = 0; idx < sale.services.length; idx++) {
-                var service = sale.services[idx];
-                this.monthlySalesSummary.noOfServices += service.quantity;
-                this.monthlySalesSummary.totalCost += service.quantity * service.price;
-            }
+        for (var x = 1; x < monthlySales.length; x++) {
+            var sale = monthlySales[x].splice(",");
+
+            this.monthlySalesSummary.noOfTires += sale[2];
+
+            this.monthlySalesSummary.noOfServices += sale[4] ? sale[4].split(' ').length - 1 : 0;
+            this.monthlySalesSummary.totalCost += sale[6];
         }
     }]);
     app.controller("SalesController", ["$scope", function ($scope) {
@@ -48,16 +36,18 @@
         this.populateTiresData = function (data) {
             var tireNames = "", tireCost = 0;
             for (var x = 0; x < data.tires.length; x++) {
-                tireNames += data.tires[x].quantity + "x" + data.tires[x].tire + ", ";
-                tireCost += data.tires[x].price * data.tires[x].quantity;
+                var tireObj = data.tires[x];
+                tireNames += tireObj.quantity + "x" + tireObj.tire + ", ";
+                tireCost += parseFloat(tireObj.price * tireObj.quantity);
             }
             return tireNames + "($" + tireCost + ")";
         };
         this.populateServicesData = function (data) {
             var serviceNames = "", servicesCost = 0;
             for (var x = 0; x < data.services.length; x++) {
-                serviceNames += data.services[x].name + ", ";
-                servicesCost += data.services[x].price * data.services[x].quantity;
+                var service = data.services[x];
+                serviceNames += service.name + ", ";
+                servicesCost += parseFloat(service.price * service.quantity);
             }
             return serviceNames + "($" + servicesCost + ")";
         };

@@ -23,7 +23,7 @@ if (isset($_SESSION['login_user']) && isset($_SESSION['login_shop_id'])) {
     $inventory_data = $MONGO_DB->getInventory($shop_id);
     $history_data = $MONGO_DB->getHistory($shop_id);
 
-//    //Default time zone
+    //Default time zone
     date_default_timezone_set("America/New_York");
     $today = date('Y-06-30');
     $tomorrow = date('Y-07-01');
@@ -32,6 +32,7 @@ if (isset($_SESSION['login_user']) && isset($_SESSION['login_shop_id'])) {
     $todaysSale = $MONGO_DB->getSalesByDate($shop_id, $today, $tomorrow);
     $monthlySale = $MONGO_DB->getSalesByDate($shop_id, $monthStart, $tomorrow);
 } else {
+    session_destroy();
     error_log("main.php - session is NOT set !!!");
     header('Location: index.php'); // Redirecting To Home Page
 }
@@ -39,7 +40,31 @@ if (isset($_SESSION['login_user']) && isset($_SESSION['login_shop_id'])) {
 <head>
     <title>Your Home Page</title>
     <link href="css/main.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="data/data.js"></script>
+    <!--    <script type="text/javascript" src="data/data.js"></script>-->
+    <script type="text/javascript">
+        var ShopId = <?php echo $shop_id; ?>;
+    </script>
+    <script type="text/javascript">
+        function onMonthSelect(obj) {
+            var month = parseInt(obj.value);
+            if (month > 0) {
+                var startDate = new Date();
+                startDate.setMonth(month - 1);
+                startDate.setDate(1);
+                startDate.setHours(0, 0, 0, 0);
+
+                var endDate = new Date();
+                endDate.setMonth(month);
+                endDate.setDate(1);
+                endDate.setHours(0, 0, 0, 0);
+                document.getElementById('download_report').href = 'writeCSV.php?start_date=' + startDate.getTime() / 1000 + '&end_date=' + endDate.getTime() / 1000 + '&shop_id=' + ShopId;
+                document.getElementById('download_report').className = '';
+            } else {
+                document.getElementById('download_report').href = '#';
+                document.getElementById('download_report').className = 'disabled';
+            }
+        }
+    </script>
 </head>
 <body ng-app="SalesModule">
 <div id="profile">
@@ -58,12 +83,15 @@ if (isset($_SESSION['login_user']) && isset($_SESSION['login_shop_id'])) {
             <li ng-class="{ active:tabCtrl.isSet(3) }">
                 <a href ng-click="tabCtrl.setTab(3)">History</a>
             </li>
+            <li ng-class="{ active:tabCtrl.isSet(4) }">
+                <a href ng-click="tabCtrl.setTab(4)">Reports</a>
+            </li>
         </ul>
     </div>
     <div id="dash_board" ng-cloak ng-show="tabCtrl.isSet(0)" ng-controller="DashboardController as dashCtrl">
         <script type="text/javascript">
-            var dailySales = <?php echo $todaysSale; ?>;
-            var monthlySales = <?php echo $monthlySale; ?>;
+            var dailySales = <?php echo json_encode($todaysSale); ?>;
+            var monthlySales = <?php echo json_encode($monthlySale); ?>;
         </script>
         <div class="daily_sale">
             <table>
@@ -178,6 +206,27 @@ if (isset($_SESSION['login_user']) && isset($_SESSION['login_shop_id'])) {
             </tr>
             </tbody>
         </table>
+    </div>
+    <div class="reports_table" ng-show="tabCtrl.isSet(4)" ng-cloak>
+        <div>
+            <label id="month_label" for="startDate">Month</label>
+            <select id="month_select" name="startDate" onchange="onMonthSelect(this)">
+                <option value="0">Select Month</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+            <a id="download_report" class="disabled" href="#">Download</a>
+        </div>
     </div>
 </div>
 <script type="text/javascript" src="lib/angular.min.js"></script>

@@ -28,8 +28,8 @@ if (isset($_REQUEST['imageData'])) {
     fwrite($file, $data);
     fclose($file);
 
-    $output = shell_exec('br -algorithm FaceRecognition -compare uploads/myImage.png uploads/my.png > uploads/temp');
-    $output1 = shell_exec('cat uploads/temp');
+    $output = shell_exec('sh runscript.sh uploads/myImage.png ');
+    $output1 = shell_exec('cat /tmp/result.txt');
     error_log("Output of Face Recog.\n" . $output);
     error_log("Final Score: " . $output1);
     settype($output1, "integer");

@@ -14,7 +14,6 @@ if (isset($_REQUEST['imageData'])) {
     // Path where the image is going to be saved
     $filePath = 'uploads/myImage.png';
 
-//    error_log("2 " . file_exists($filePath));
     // Delete previously uploaded image
 //    if (file_exists($filePath)) {
 //        unlink($filePath);
@@ -26,29 +25,51 @@ if (isset($_REQUEST['imageData'])) {
 //    fwrite($file, $data);
 //    fclose($file);
 
-//    $output = shell_exec('sh runscript.sh uploads/myImage.png ');
-      $output = shell_exec('./FREngine');
-//    error_log("Output of Face Recog.\n" . $output);
+    $output = shell_exec('./FREngine');
+    error_log("Output of Face Recog.\n" . $output);
     $output1 = shell_exec('cat /tmp/result.txt');
     error_log("Final Score: " . $output1);
-//    settype($output1, "integer");
-    if(empty($output1) == false) {
-	error_log("The match is SUCCESS !!!!");
+    if (empty($output1) == false) {
+        error_log("The match is SUCCESS !!!!");
         //Also authorize and Open
         logAndOpen("$output1");
-	echo "Name: $output1";
-        
+        echo "name:$output1";
     } else {
         $output1 = shell_exec('rm  stranger/*');
         $output1 = shell_exec('cp uploads/myImage.png stranger/image.png');
         error_log("The match is FAILED !!!!");
+        echo "";
+    }
+} else if (isset($_REQUEST['authorizeOpen'])) {
+    // Authorize Open in Database as well as Spark
+    error_log("Owner Approved the request");
+    logAndOpen($imgData);
+} else if (isset($_REQUEST['rejectAccess'])) {
+    // Reject the access
+    error_log("Rejected Access");
+    shell_exec('mv stranger/image.png stranger/image_rejected.png');
+} else if (isset($_REQUEST['pollAuthRequest'])) {
+    // Poll for Stranger
+    error_log("Polling...");
+    if (file_exists('stranger/image_approved.png')) {
+        error_log("Approved");
+        echo "status:approved";
+    } else {
+        if (file_exists('stranger/image_rejected.png')) {
+            error_log("Rejected");
+            echo "status:rejected";
+        } else {
+            error_log("InProgress");
+            echo "status:inprogress";
+        }
     }
 } else {
     error_log("Sorry, the key does not exist");
 }
 
 //function to log and open
-function logAndOpen($arg) {
+function logAndOpen($arg)
+{
     //Enter into the DB
     $output = shell_exec("sh logEntry.sh $arg");
 
@@ -57,35 +78,6 @@ function logAndOpen($arg) {
 
     // move the stranger pic to approved state
     shell_exec('mv stranger/image.png stranger/image_approved.png');
-
 }
-
-
-// Authorize Open in Database as well as Spark
-if (isset($_REQUEST['authorizeOpen'])) {
-    logAndOpen($imgData); 
-
-}
-
-
-// Reject the access
-if (isset($_REQUEST['rejectAccess'])) {
-    shell_exec('mv stranger/image.png stranger/image_rejected.png');
-}
-
-// Poll for Stranger
-if (isset($_REQUEST['pollAuthRequest'])) {
-    if ( file_exists('stranger/image_approved.png')) {
-        echo "status: approved";
-    } else { 
-       if ( file_exists('stranger/image_rejected.png')) {
-        echo "status: rejected";
-       } else {
-        echo "status: inprogress";
-       }
-    }
-}
-
-
 
 ?>

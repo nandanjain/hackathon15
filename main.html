@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
     <title></title>
     <style type="text/css">
         video {
@@ -39,11 +40,11 @@
             left: 0px;
             height: auto;
             width: auto;
-            font-size: 30rem;
             text-align: center;
             color: rgba(255, 0, 0, 0.4);
             display: none;
             z-index: 999;
+            font-size: 8rem;
         }
     </style>
 </head>
@@ -54,6 +55,8 @@
 <canvas></canvas>
 
 <script>
+    var counterDiv = document.getElementById("counter");
+
     function init() {
         document.getElementById("request_access").style.height = screen.availHeight;
     }
@@ -99,11 +102,70 @@
                 picUrl = picUrl.replace(/^data:image\/(png|jpg);base64,/, "");
 
                 var serverReq = new XMLHttpRequest();
+                serverReq.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var response = this.responseText;
+                        if (!response || response.length === 0) {
+                            pollRequest();
+                        } else {
+                            var resp_arr = response.split(":");
+                            if (resp_arr[0] === 'name') {
+                                auth_success(resp_arr[1]);
+                            }
+                        }
+                    }
+                };
                 serverReq.open("POST", "server.php", true);
                 serverReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 serverReq.send("imageData=" + picUrl);
+
+                counterDiv.style.fontSize = null;
+                auth_pending();
             }
         }
+
+        function auth_success(name) {
+            // display welcome message
+            counterDiv.style.color = "Green";
+            counterDiv.innerHTML = "Welcome " + (name ? name : "!!!");
+        }
+
+        function auth_pending() {
+            // display waiting message
+            counterDiv.style.color = "orange";
+            counterDiv.innerHTML = "Verifying...";
+        }
+
+        function auth_denied() {
+            // display Access Denied Message
+            counterDiv.style.color = "RED";
+            counterDiv.innerHTML = "Access is Denied !!!";
+        }
+
+        function pollRequest() {
+            var httpReq = new XMLHttpRequest();
+            httpReq.open("GET", "server.php?pollAuthRequest=" + new Date().getTime(), true);
+            httpReq.onreadystatechange = pollResponse;
+            httpReq.send(null);
+        }
+
+        function pollResponse() {
+            if (this.readyState == 4 && this.status == 200) {
+                switch (this.responseText) {
+                    case 'status:approved' :
+                        auth_success();
+                        break;
+                    case 'status:rejected' :
+                        auth_denied();
+                        break;
+                    case 'status:inprogress':
+                    default :
+                        setTimeout(pollRequest, 1000);
+                        break;
+                }
+            }
+        }
+
         function success(stream) {
             var counterInterval = undefined;
             var interval = undefined;
@@ -114,13 +176,13 @@
                     canvas.height = video.videoHeight;
                     canvas.width = video.videoWidth;
                     tmpCtx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+
                     if (!counterInterval) {
                         var count = 5;
-                        var counterDiv = document.getElementById("counter");
+                        counterDiv.style.fontSize = "30rem";
                         counterDiv.style.display = "block";
                         counterInterval = setInterval(function () {
                             if (count === 0) {
-                                counterDiv.style.display = "none";
                                 clearInterval(counterInterval);
                                 clearInterval(interval);
                                 interval = undefined;

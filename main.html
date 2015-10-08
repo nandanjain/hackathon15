@@ -15,8 +15,7 @@
             position: absolute;
             top: 0px;
             left: 0px;
-            height: 100%;
-            width: 100%;
+            display: none;
         }
 
         img {
@@ -24,72 +23,127 @@
             top: 0px;
             left: 0px;
             border: 1px solid green;
+            display: none;
+        }
+
+        button#request_access {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            font-size: x-large;
+        }
+
+        div#counter {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            height: auto;
+            width: auto;
+            font-size: 30rem;
+            text-align: center;
+            color: rgba(255, 0, 0, 0.4);
+            display: none;
+            z-index: 999;
         }
     </style>
 </head>
-<body>
+<body onload="init();">
+<button id="request_access" onclick="requestCapture()">Request Access</button>
+<div id="counter"></div>
 <video autoplay></video>
 <canvas></canvas>
 
 <script>
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    function init() {
+        document.getElementById("request_access").style.height = screen.availHeight;
+    }
+    function requestCapture() {
+        document.getElementById("request_access").style.display = "none";
+        launchIntoFullscreen(document.getElementsByTagName("body")[0]);
+        startCapture();
+    }
 
-    var video = document.querySelector('video');
-    var canvas = document.querySelector('canvas');
-    var tmpCtx = canvas.getContext('2d');
-    var localMediaStream = null;
-
-    function snapshot() {
-        if (localMediaStream) {
-            // "image/webp" works in Chrome.
-            // Other browsers will fall back to image/png.
-            var picUrl = canvas.toDataURL('image/png');
-            tmpCtx.clearRect(0, 0, video.videoWidth, video.videoHeight);
-            var image = new Image();
-            image.onload = function () {
-                tmpCtx.drawImage(image, 0, 0, video.videoWidth, video.videoHeight);
-                tmpCtx.arc(150, 150, 150, 0, Math.PI * 2, true);
-                tmpCtx.lineWidth = 5;
-                tmpCtx.strokeStyle = '#003300';
-                tmpCtx.stroke();
-                tmpCtx.clip();
-                tmpCtx.closePath();
-                tmpCtx.restore();
-            };
-            image.src = picUrl;
-
-            document.querySelector('video').style.display = "none";
-            picUrl = picUrl.replace(/^data:image\/(png|jpg);base64,/, "");
-
-            var serverReq = new XMLHttpRequest();
-            serverReq.open("POST", "server.php", true);
-            serverReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            serverReq.send("imageData=" + picUrl);
+    function launchIntoFullscreen(element) {
+        if (element.requestFullscreen) {
+            element.requestFullscreen();
+        } else if (element.mozRequestFullScreen) {
+            element.mozRequestFullScreen();
+        } else if (element.webkitRequestFullscreen) {
+            element.webkitRequestFullscreen();
+        } else if (element.msRequestFullscreen) {
+            element.msRequestFullscreen();
         }
     }
-    function success(stream) {
-        video.src = window.URL.createObjectURL(stream);
-        localMediaStream = stream;
-        tmpCtx.save();
-        tmpCtx.beginPath();
-        tmpCtx.arc(100, 75, 100, 0, Math.PI * 2, true);
-        tmpCtx.lineWidth = 5;
-        tmpCtx.strokeStyle = '#003300';
-        tmpCtx.stroke();
-        tmpCtx.clip();
 
-        interval = setInterval(function () {
-            tmpCtx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
-        }, 20);
+    function startCapture() {
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+        var video = document.querySelector('video');
+        var canvas = document.querySelector('canvas');
+        canvas.style.display = "block";
+
+        var tmpCtx = canvas.getContext('2d');
+        var localMediaStream = null;
+
+        function snapshot() {
+            if (localMediaStream) {
+                // "image/webp" works in Chrome.
+                // Other browsers will fall back to image/png.
+                var picUrl = canvas.toDataURL('image/png');
+                var image = new Image();
+                image.style.display = "block";
+                image.onload = function () {
+                    tmpCtx.drawImage(image, 0, 0, video.videoWidth, video.videoHeight);
+                };
+                image.src = picUrl;
+                picUrl = picUrl.replace(/^data:image\/(png|jpg);base64,/, "");
+
+                var serverReq = new XMLHttpRequest();
+                serverReq.open("POST", "server.php", true);
+                serverReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                serverReq.send("imageData=" + picUrl);
+            }
+        }
+        function success(stream) {
+            var counterInterval = undefined;
+            var interval = undefined;
+            video.src = window.URL.createObjectURL(stream);
+            localMediaStream = stream;
+            interval = setInterval(function () {
+                if (video.videoWidth > 0 && video.videoHeight > 0) {
+                    canvas.height = video.videoHeight;
+                    canvas.width = video.videoWidth;
+                    tmpCtx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+                    if (!counterInterval) {
+                        var count = 5;
+                        var counterDiv = document.getElementById("counter");
+                        counterDiv.style.display = "block";
+                        counterInterval = setInterval(function () {
+                            if (count === 0) {
+                                counterDiv.style.display = "none";
+                                clearInterval(counterInterval);
+                                clearInterval(interval);
+                                interval = undefined;
+                                counterInterval = undefined;
+                                snapshot();
+                            } else {
+                                counterDiv.innerHTML = count;
+                            }
+                            count--;
+                        }, 1000);
+                    }
+                }
+            }, 100);
+        }
+
+        function error(err) {
+            alert("The following error occured: " + err.name);
+        }
+
+        // Not showing vendor prefixes or code that works cross-browser.
+        navigator.getUserMedia({video: true}, success, error);
     }
 
-    function error(err) {
-        alert("The following error occured: " + err.name);
-    }
-    canvas.addEventListener('click', snapshot, false);
-
-    // Not showing vendor prefixes or code that works cross-browser.
-    navigator.getUserMedia({video: true}, success, error);
 </script>
 </body>
 </html>

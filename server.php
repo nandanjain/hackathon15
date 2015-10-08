@@ -11,8 +11,6 @@ if (isset($_REQUEST['imageData'])) {
     $imgData = $_REQUEST['imageData'];
     $imgData = str_replace(" ", "+", $imgData);
     $data = base64_decode($imgData);
-//    $data = $imgData;
-//    error_log("1 " . $imgData);
     // Path where the image is going to be saved
     $filePath = 'uploads/myImage.png';
 
@@ -22,7 +20,6 @@ if (isset($_REQUEST['imageData'])) {
         unlink($filePath);
     }
     error_log("3 " . $data);
-//    file_put_contents($filePath, $data);
 
     // Write $imgData into the image file
     $file = fopen($filePath, 'w');

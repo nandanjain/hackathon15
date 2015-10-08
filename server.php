@@ -15,15 +15,15 @@ if (isset($_REQUEST['imageData'])) {
     $filePath = 'uploads/myImage.png';
 
     // Delete previously uploaded image
-//    if (file_exists($filePath)) {
-//        unlink($filePath);
-//    }
+    if (file_exists($filePath)) {
+        unlink($filePath);
+    }
     error_log("3 " . $data);
 
     // Write $imgData into the image file
-//    $file = fopen($filePath, 'w');
-//    fwrite($file, $data);
-//    fclose($file);
+    $file = fopen($filePath, 'w');
+    fwrite($file, $data);
+    fclose($file);
 
     $output = shell_exec('./FREngine');
     error_log("Output of Face Recog.\n" . $output);

@@ -27,13 +27,14 @@ if (isset($_REQUEST['imageData'])) {
 
     $output = shell_exec('./FREngine');
     error_log("Output of Face Recog.\n" . $output);
-    $output1 = shell_exec('cat /tmp/result.txt');
+    $output1 = shell_exec('cat result.txt');
     error_log("Final Score: " . $output1);
     if (empty($output1) == false) {
         error_log("The match is SUCCESS !!!!");
         //Also authorize and Open
-        logAndOpen("$output1");
-        echo "name:$output1";
+        $Name = strtok($output1,',');
+        logAndOpen("$Name");
+        echo "name:$Name";
     } else {
         $output1 = shell_exec('rm  stranger/*');
         $output1 = shell_exec('cp uploads/myImage.png stranger/image.png');

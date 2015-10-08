@@ -65,7 +65,7 @@ fp = popen("/bin/ls ./Authorized/", "r");
       printf( " %s\n", token );
       natoiResult = atoi(token);
       printf("INTERGER VAL: %d",atoi(token));
-    if (natoiResult >3)
+    if (natoiResult >=3)
    {
       nMatchedResult = natoiResult;
      strcpy(MatchedName,path); 

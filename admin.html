@@ -5,22 +5,178 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
     <title></title>
+    <style type="text/css">
+        body {
+            font-family: monospace;
+            font-size: 1.8rem;
+        }
+
+        /* Login Page */
+        #main {
+            text-align: center;
+        }
+
+        span.error_message {
+            color: red
+        }
+
+        h1 {
+            font-size: 5rem;
+            text-shadow: 0.3rem 0.3rem rgba(200, 200, 200, .5);
+        }
+
+        h2 {
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+            margin: -10px -40px;
+            padding: 15px
+        }
+
+        #login {
+            width: 300px;
+            border-radius: 10px;
+            border: 2px solid #ccc;
+            padding: 1rem 2rem;
+            margin: auto;
+            background-color: rgba(77, 77, 77, 0.7);
+        }
+
+        input {
+            font-size: 1rem;
+            padding: 0.5rem 0 0.5rem 0;
+            margin: 1rem 0;
+        }
+
+        input[type=text], input[type=password] {
+            width: 99.5%;
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+        input[type=text]:focus, input[type=password]:focus,
+        input[type=text]:hover, input[type=password]:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        input[type=submit] {
+            width: 100%;
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            background: rgba(77, 77, 77, 0.5);
+        }
+
+        input[type=submit]:hover {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        input::-webkit-input-placeholder {
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        /* Old Firefox below 18 */
+        input:-moz-placeholder {
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        /* New Firefox */
+        input::-moz-placeholder {
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        div#accessRequest {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            height: 60%;
+            width: 100%;
+            border: 2rem solid red;
+        }
+    </style>
+
 </head>
 <body>
 <div id="login">
     <h2>Login</h2>
-
-    <form action="" method="post">
-        <label>EMail :</label>
-        <input id="email" name="email" placeholder="email@server.com" type="text">
-        <label>Password :</label>
-        <input id="password" name="password" placeholder="**********" type="password">
-        <input name="submit" type="submit" value=" Login ">
-        <span id="error_message"><?php echo $error; ?></span>
-    </form>
+    <label>EMail :</label>
+    <input id="email" name="email" placeholder="email@server.com" type="text">
+    <label>Password :</label>
+    <input id="password" name="password" placeholder="**********" type="password">
+    <input name="submit" type="button" value=" Login " onclick="loginSubmit()">
+    <span id="error_message"></span>
 </div>
 <div id="logPage">
-
+    Checking if there is someone at door...
+    You will be notified.
 </div>
+<div id="accessRequest">
+    <img src="" id="stranger_img">
+    <button id="button_accept"></button>
+    <button id="button_reject"></button>
+</div>
+
+<script type="text/javascript">
+    function loginSubmit() {
+        var username = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+        alert(username + " : " + password);
+
+        var httpReq = new XMLHttpRequest();
+        httpReq.open("POST", "server.php", true);
+        httpReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        httpReq.onreadystatechange = loginResponse;
+        httpReq.send("adminLogin=jd&username=" + username + "&password=" + password + "&" + new Date().getTime());
+    }
+    function loginResponse() {
+        if (this.readyState == 4 && this.status == 200) {
+            switch (this.responseText) {
+                case 'login:success' :
+                    auth_success();
+                    break;
+                case 'login:failure' :
+                    auth_denied();
+                    break;
+            }
+        }
+    }
+    function auth_success() {
+        document.getElementById("login").style.display = "none";
+        showLogPage();
+    }
+    function auth_denied() {
+        alert("User Name or password is incorrect");
+    }
+    function showLogPage() {
+        document.getElementById("logPage").style.display = "block";
+        pollRequest();
+    }
+    function pollRequest() {
+        alert("sending poll");
+        var httpReq = new XMLHttpRequest();
+        httpReq.open("GET", "stranger/image.png?" + new Date().getTime(), true);
+        httpReq.onreadystatechange = pollResponse;
+        httpReq.send(null);
+    }
+
+    function pollResponse() {
+        if (this.readyState == 4) {
+            if (this.status == 200) {
+                alert("SomeOne is ur door !!!");
+                requestAccess();
+            } else {
+                setTimeout(pollRequest, 5000);
+            }
+        }
+    }
+
+    function requestAccess() {
+        var accesReq = document.getElementById("accessRequest");
+        var image = document.getElementById("stranger_img");
+        accesReq.style.display = "block";
+        image.src = "stranger/image.png?" + new Date().getTime();
+    }
+
+</script>
 </body>
 </html>

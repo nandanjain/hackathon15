@@ -32,7 +32,7 @@ if (isset($_REQUEST['imageData'])) {
     if (empty($output1) == false) {
         error_log("The match is SUCCESS !!!!");
         //Also authorize and Open
-        $Name = strtok($output1,',');
+        $Name = strtok($output1, ',');
         logAndOpen("$Name");
         echo "name:$Name";
     } else {
@@ -47,7 +47,7 @@ if (isset($_REQUEST['imageData'])) {
     $password = $_POST['password'];
     error_log("Admin Login Requested : " . $username . " -- " . $password);
 
-    if ($username == "karthven@gmail.com" && $password == "hackathon15") {
+    if ($username == "karthven@gmail.com" && $password == "hack") {
         echo "login:success";
     } else {
         echo "login:failure";
@@ -78,56 +78,29 @@ if (isset($_REQUEST['imageData'])) {
 } else {
     error_log("Sorry, the key does not exist");
 }
-/*
-function sendSpark()
-{
-    $ch = curl_init();
-    $url = 'https://api.particle.io/v1/devices/55ff6a065075555322151787/GainAccess';
-    $data = array('access_token' => '8a6a2fb3fd5d276609ea960af008247c72e34a97');
-
-    // use key 'http' even if you send the request to https://...
-    $options = array(
-        'http' => array(
-            'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-            'method' => 'POST',
-            'content' => http_build_query($data),
-        ),
-    );
-$params = array('http' => array(
-            'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-              'method' => 'POST',
-              'content' => $data
-            ));
-  $ctx = stream_context_create($params);
-  $fp = @fopen($url, 'rb', false, $ctx);
-  //  $context = stream_context_create($options);
-  //  $result = file_get_contents($url, false, $context);
-    //error_log("sendSpark : " . $result);
-}
-*/
 
 function sendSpark()
 {
     $url = 'https://api.particle.io/v1/devices/55ff6a065075555322151787/GainAccess';
-    $fields = array(
-    						'access_token' => urlencode('8a6a2fb3fd5d276609ea960af008247c72e34a97')
-    				);
-    
+    $fields = array('access_token' => urlencode('8a6a2fb3fd5d276609ea960af008247c72e34a97'));
+    $fields_string = '';
     //url-ify the data for the POST
-    foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    foreach ($fields as $key => $value) {
+        $fields_string .= $key . '=' . $value . '&';
+    }
     rtrim($fields_string, '&');
-    
+
     //open connection
     $ch = curl_init();
-    
+
     //set the url, number of POST vars, POST data
-    curl_setopt($ch,CURLOPT_URL, $url);
-    curl_setopt($ch,CURLOPT_POST, count($fields));
-    curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
-    
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, count($fields));
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+
     //execute post
     $result = curl_exec($ch);
-    error.log("Successfully sent to Spark"); 
+    error_log("Successfully sent to Spark");
 }
 
 

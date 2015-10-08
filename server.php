@@ -41,6 +41,17 @@ if (isset($_REQUEST['imageData'])) {
         error_log("The match is FAILED !!!!");
         echo "";
     }
+} else if (isset($_REQUEST['adminLogin'])) {
+    // Reject the access
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    error_log("Admin Login Requested : " . $username . " -- " . $password);
+
+    if ($username == "karthven@gmail.com" && $password == "hackathon15") {
+        echo "login:success";
+    } else {
+        echo "login:failure";
+    }
 } else if (isset($_REQUEST['authorizeOpen'])) {
     // Authorize Open in Database as well as Spark
     error_log("Owner Approved the request");

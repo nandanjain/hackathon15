@@ -55,7 +55,7 @@ function logAndOpen($arg) {
     // Invoke Spark API
     //$response = file_get_contents('http://example.com/');
 
-    // Remove the stranger pic
+    // move the stranger pic to approved state
     shell_exec('mv stranger/image.png stranger/image_approved.png');
 
 }
@@ -75,10 +75,10 @@ if (isset($_REQUEST['rejectAccess'])) {
 
 // Poll for Stranger
 if (isset($_REQUEST['pollAuthRequest'])) {
-    if ( file_exists('stranger/image_approved.png') {
+    if ( file_exists('stranger/image_approved.png')) {
         echo "status: approved";
     } else { 
-       if ( file_exists('stranger/image_rejected.png') {
+       if ( file_exists('stranger/image_rejected.png')) {
         echo "status: rejected";
        } else {
         echo "status: inprogress";

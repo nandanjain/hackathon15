@@ -29,17 +29,19 @@ if (isset($_REQUEST['imageData'])) {
     fwrite($file, $data);
     fclose($file);
 
-    $output = shell_exec('sh runscript.sh uploads/myImage.png ');
+//    $output = shell_exec('sh runscript.sh uploads/myImage.png ');
     $output1 = shell_exec('cat /tmp/result.txt');
     error_log("Output of Face Recog.\n" . $output);
     error_log("Final Score: " . $output1);
-    settype($output1, "integer");
-    if($output1 >= 3) {
+//    settype($output1, "integer");
+    if(empty($output1) == false) {
 	error_log("The match is SUCCESS !!!!");
         //Also authorize and Open
-        logAndOpen("TestArgTODOReplace");
+        //logAndOpen("TestArgTODOReplace");
+	echo "Name: $output1";
         
     } else {
+        $output1 = shell_exec('cp uploads/myImage.png stranger/image.png');
         error_log("The match is FAILED !!!!");
     }
 } else {

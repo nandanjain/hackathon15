@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width; height=device-height user-scalable=no" />
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title></title>
     <style type="text/css">
-        video {
+		        video {
             position: absolute;
             top: 0px;
             left: 0px;
@@ -18,78 +20,112 @@
             height: 100%;
             width: 100%;
         }
-
-        img {
-            position: absolute;
-            top: 0px;
-            left: 0px;
-            border: 1px solid green;
-        }
     </style>
+	<link rel="stylesheet" href="//code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />
+	<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>	
+	<script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script> 
+
+
+
+      <script type="text/javascript">
+         $(document).ready(function(){setTimeout(hideSplash, 5000);});
+
+		 function hideSplash()
+		 {
+			 var spl = document.querySelector("splash");
+			 $('#splash').hide();
+			 window.location.href = "#camerapage";
+			 startCamera();			 
+		 }
+      </script> 
+  
+   </head>
+	
+</html>
+
 </head>
-<body>
-<video autoplay></video>
-<canvas></canvas>
+<body >
+	 <div id="index" data-role="page" >
+		<div data-role="content" data-theme="c">
+			<img id="splash" src="img/splashscreen.png" /> 
+		</div>
+	</div> 
+	<div id="camerapage" data-role="page"  >
+		
+		
+		<div data-role="content">
+			<div>
+				<a > Eye Protect </a>		
+				<video autoplay></video>
+				<canvas></canvas>
 
-<script>
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+				<button data-role="button" onclick="snapshot()"> Click to Access </button>
+			</div>
+			
+			<script>
+				function startCamera() {
+					navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
-    var video = document.querySelector('video');
-    var canvas = document.querySelector('canvas');
-    var tmpCtx = canvas.getContext('2d');
-    var localMediaStream = null;
+					var video = document.querySelector('video');
+					var canvas = document.querySelector('canvas');
+					var tmpCtx = canvas.getContext('2d');
+					var localMediaStream = null;
+					canvas.addEventListener('click', snapshot, false);
+						// Not showing vendor prefixes or code that works cross-browser.
+					navigator.getUserMedia({video: true}, success, error);
+				}
+				
+				function snapshot() {
+					if (localMediaStream) {
+						// "image/webp" works in Chrome.
+						// Other browsers will fall back to image/png.
+						var picUrl = canvas.toDataURL('image/png');
+						tmpCtx.clearRect(0, 0, video.videoWidth, video.videoHeight);
+						var image = new Image();
+						image.onload = function () {
+							tmpCtx.drawImage(image, 0, 0, video.videoWidth, video.videoHeight);
+							tmpCtx.arc(150, 150, 150, 0, Math.PI * 2, true);
+							tmpCtx.lineWidth = 5;
+							tmpCtx.strokeStyle = '#003300';
+							tmpCtx.stroke();
+							tmpCtx.clip();
+							tmpCtx.closePath();
+							tmpCtx.restore();
+						};
+						image.src = picUrl;
 
-    function snapshot() {
-        if (localMediaStream) {
-            // "image/webp" works in Chrome.
-            // Other browsers will fall back to image/png.
-            var picUrl = canvas.toDataURL('image/png');
-            tmpCtx.clearRect(0, 0, video.videoWidth, video.videoHeight);
-            var image = new Image();
-            image.onload = function () {
-                tmpCtx.drawImage(image, 0, 0, video.videoWidth, video.videoHeight);
-                tmpCtx.arc(150, 150, 150, 0, Math.PI * 2, true);
-                tmpCtx.lineWidth = 5;
-                tmpCtx.strokeStyle = '#003300';
-                tmpCtx.stroke();
-                tmpCtx.clip();
-                tmpCtx.closePath();
-                tmpCtx.restore();
-            };
-            image.src = picUrl;
+						document.querySelector('video').style.display = "none";
+						picUrl = picUrl.replace(/^data:image\/(png|jpg);base64,/, "");
 
-            document.querySelector('video').style.display = "none";
-            picUrl = picUrl.replace(/^data:image\/(png|jpg);base64,/, "");
+						var serverReq = new XMLHttpRequest();
+						serverReq.open("POST", "server.php", true);
+						serverReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+						serverReq.send("imageData=" + picUrl);
+					}
+				}
+				function success(stream) {
+					video.src = window.URL.createObjectURL(stream);
+					localMediaStream = stream;
+					tmpCtx.save();
+					tmpCtx.beginPath();
+					tmpCtx.arc(100, 75, 100, 0, Math.PI * 2, true);
+					tmpCtx.lineWidth = 5;
+					tmpCtx.strokeStyle = '#003300';
+					tmpCtx.stroke();
+					tmpCtx.clip();
 
-            var serverReq = new XMLHttpRequest();
-            serverReq.open("POST", "server.php", true);
-            serverReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            serverReq.send("imageData=" + picUrl);
-        }
-    }
-    function success(stream) {
-        video.src = window.URL.createObjectURL(stream);
-        localMediaStream = stream;
-        tmpCtx.save();
-        tmpCtx.beginPath();
-        tmpCtx.arc(100, 75, 100, 0, Math.PI * 2, true);
-        tmpCtx.lineWidth = 5;
-        tmpCtx.strokeStyle = '#003300';
-        tmpCtx.stroke();
-        tmpCtx.clip();
+					interval = setInterval(function () {
+						tmpCtx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+					}, 20);
+				}
 
-        interval = setInterval(function () {
-            tmpCtx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
-        }, 20);
-    }
+				function error(err) {
+					alert("The following error occured: " + err.name);
+				}
+			</script> 
 
-    function error(err) {
-        alert("The following error occured: " + err.name);
-    }
-    canvas.addEventListener('click', snapshot, false);
+		</div>
+	</div>
 
-    // Not showing vendor prefixes or code that works cross-browser.
-    navigator.getUserMedia({video: true}, success, error);
-</script>
 </body>
 </html>

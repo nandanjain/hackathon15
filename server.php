@@ -39,6 +39,7 @@ if (isset($_REQUEST['imageData'])) {
 	echo "Name: $output1";
         
     } else {
+        $output1 = shell_exec('rm  stranger/*');
         $output1 = shell_exec('cp uploads/myImage.png stranger/image.png');
         error_log("The match is FAILED !!!!");
     }
@@ -55,21 +56,36 @@ function logAndOpen($arg) {
     //$response = file_get_contents('http://example.com/');
 
     // Remove the stranger pic
-    shell_exec('rm stranger/*');
+    shell_exec('mv stranger/image.png stranger/image_approved.png');
 
 }
 
 
 // Authorize Open in Database as well as Spark
 if (isset($_REQUEST['authorizeOpen'])) {
-    $imgData = $_REQUEST['authorizeOpen'];
-    $imgData = str_replace(" ", "+", $imgData);
-    $data = base64_decode($imgData);
-//    $data = $imgData;
-    error_log("1 " . $imgData);
     logAndOpen($imgData); 
 
-} else {
-    error_log("Sorry, the key does not exist");
 }
+
+
+// Reject the access
+if (isset($_REQUEST['rejectAccess'])) {
+    shell_exec('mv stranger/image.png stranger/image_rejected.png');
+}
+
+// Poll for Stranger
+if (isset($_REQUEST['pollAuthRequest'])) {
+    if ( file_exists('stranger/image_approved.png') {
+        echo "status: approved";
+    } else { 
+       if ( file_exists('stranger/image_rejected.png') {
+        echo "status: rejected";
+       } else {
+        echo "status: inprogress";
+       }
+    }
+}
+
+
+
 ?>

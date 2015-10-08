@@ -1,0 +1,331 @@
+U1
+Length : 3/nbr -algorithm FaceRecognition -compare ../uploads/myImage.png ../Authorized/U1/ > OUTPUT.txtOUTFILE DATA:              ../uploads/m 
+ ../uploads/m
+INTERGER VAL: 0 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha -3.40282e+38 
+ /home/chetha
+INTERGER VAL: 0 -3.40282e+38
+INTERGER VAL: -3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 23.9268      
+ /home/chetha
+INTERGER VAL: 0 23.9268
+INTERGER VAL: 23 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.66696      
+ /home/chetha
+INTERGER VAL: 0 3.66696
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.22074      
+ /home/chetha
+INTERGER VAL: 0 3.22074
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 4.4057       
+ /home/chetha
+INTERGER VAL: 0 4.4057
+INTERGER VAL: 4 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 4.15412      
+ /home/chetha
+INTERGER VAL: 0 4.15412
+INTERGER VAL: 4 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 4.89288      
+ /home/chetha
+INTERGER VAL: 0 4.89288
+INTERGER VAL: 4 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.45524      
+ /home/chetha
+INTERGER VAL: 0 3.45524
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.08218      
+ /home/chetha
+INTERGER VAL: 0 3.08218
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 5.4095       
+ /home/chetha
+INTERGER VAL: 0 5.4095
+INTERGER VAL: 5 
+
+INTERGER VAL: 0U2
+Length : 3/nbr -algorithm FaceRecognition -compare ../uploads/myImage.png ../Authorized/U1/ > OUTPUT.txtOUTFILE DATA:              ../uploads/m 
+ ../uploads/m
+INTERGER VAL: 0 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha -3.40282e+38 
+ /home/chetha
+INTERGER VAL: 0 -3.40282e+38
+INTERGER VAL: -3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 23.9268      
+ /home/chetha
+INTERGER VAL: 0 23.9268
+INTERGER VAL: 23 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.66696      
+ /home/chetha
+INTERGER VAL: 0 3.66696
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.22074      
+ /home/chetha
+INTERGER VAL: 0 3.22074
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 4.4057       
+ /home/chetha
+INTERGER VAL: 0 4.4057
+INTERGER VAL: 4 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 4.15412      
+ /home/chetha
+INTERGER VAL: 0 4.15412
+INTERGER VAL: 4 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 4.89288      
+ /home/chetha
+INTERGER VAL: 0 4.89288
+INTERGER VAL: 4 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.45524      
+ /home/chetha
+INTERGER VAL: 0 3.45524
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.08218      
+ /home/chetha
+INTERGER VAL: 0 3.08218
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 5.4095       
+ /home/chetha
+INTERGER VAL: 0 5.4095
+INTERGER VAL: 5 
+
+INTERGER VAL: 0U3
+Length : 3/nbr -algorithm FaceRecognition -compare ../uploads/myImage.png ../Authorized/U1/ > OUTPUT.txtOUTFILE DATA:              ../uploads/m 
+ ../uploads/m
+INTERGER VAL: 0 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha -3.40282e+38 
+ /home/chetha
+INTERGER VAL: 0 -3.40282e+38
+INTERGER VAL: -3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 23.9268      
+ /home/chetha
+INTERGER VAL: 0 23.9268
+INTERGER VAL: 23 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.66696      
+ /home/chetha
+INTERGER VAL: 0 3.66696
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.22074      
+ /home/chetha
+INTERGER VAL: 0 3.22074
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 4.4057       
+ /home/chetha
+INTERGER VAL: 0 4.4057
+INTERGER VAL: 4 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 4.15412      
+ /home/chetha
+INTERGER VAL: 0 4.15412
+INTERGER VAL: 4 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 4.89288      
+ /home/chetha
+INTERGER VAL: 0 4.89288
+INTERGER VAL: 4 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.45524      
+ /home/chetha
+INTERGER VAL: 0 3.45524
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.08218      
+ /home/chetha
+INTERGER VAL: 0 3.08218
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 5.4095       
+ /home/chetha
+INTERGER VAL: 0 5.4095
+INTERGER VAL: 5 
+
+INTERGER VAL: 0U4
+Length : 3/nbr -algorithm FaceRecognition -compare ../uploads/myImage.png ../Authorized/U1/ > OUTPUT.txtOUTFILE DATA:              ../uploads/m 
+ ../uploads/m
+INTERGER VAL: 0 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha -3.40282e+38 
+ /home/chetha
+INTERGER VAL: 0 -3.40282e+38
+INTERGER VAL: -3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 23.9268      
+ /home/chetha
+INTERGER VAL: 0 23.9268
+INTERGER VAL: 23 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.66696      
+ /home/chetha
+INTERGER VAL: 0 3.66696
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.22074      
+ /home/chetha
+INTERGER VAL: 0 3.22074
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 4.4057       
+ /home/chetha
+INTERGER VAL: 0 4.4057
+INTERGER VAL: 4 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 4.15412      
+ /home/chetha
+INTERGER VAL: 0 4.15412
+INTERGER VAL: 4 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 4.89288      
+ /home/chetha
+INTERGER VAL: 0 4.89288
+INTERGER VAL: 4 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.45524      
+ /home/chetha
+INTERGER VAL: 0 3.45524
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.08218      
+ /home/chetha
+INTERGER VAL: 0 3.08218
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 5.4095       
+ /home/chetha
+INTERGER VAL: 0 5.4095
+INTERGER VAL: 5 
+
+INTERGER VAL: 0U5
+Length : 3/nbr -algorithm FaceRecognition -compare ../uploads/myImage.png ../Authorized/U1/ > OUTPUT.txtOUTFILE DATA:              ../uploads/m 
+ ../uploads/m
+INTERGER VAL: 0 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha -3.40282e+38 
+ /home/chetha
+INTERGER VAL: 0 -3.40282e+38
+INTERGER VAL: -3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 23.9268      
+ /home/chetha
+INTERGER VAL: 0 23.9268
+INTERGER VAL: 23 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.66696      
+ /home/chetha
+INTERGER VAL: 0 3.66696
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.22074      
+ /home/chetha
+INTERGER VAL: 0 3.22074
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 4.4057       
+ /home/chetha
+INTERGER VAL: 0 4.4057
+INTERGER VAL: 4 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 4.15412      
+ /home/chetha
+INTERGER VAL: 0 4.15412
+INTERGER VAL: 4 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 4.89288      
+ /home/chetha
+INTERGER VAL: 0 4.89288
+INTERGER VAL: 4 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.45524      
+ /home/chetha
+INTERGER VAL: 0 3.45524
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.08218      
+ /home/chetha
+INTERGER VAL: 0 3.08218
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 5.4095       
+ /home/chetha
+INTERGER VAL: 0 5.4095
+INTERGER VAL: 5 
+
+INTERGER VAL: 0Un
+Length : 3/nbr -algorithm FaceRecognition -compare ../uploads/myImage.png ../Authorized/U1/ > OUTPUT.txtOUTFILE DATA:              ../uploads/m 
+ ../uploads/m
+INTERGER VAL: 0 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha -3.40282e+38 
+ /home/chetha
+INTERGER VAL: 0 -3.40282e+38
+INTERGER VAL: -3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 23.9268      
+ /home/chetha
+INTERGER VAL: 0 23.9268
+INTERGER VAL: 23 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.66696      
+ /home/chetha
+INTERGER VAL: 0 3.66696
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.22074      
+ /home/chetha
+INTERGER VAL: 0 3.22074
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 4.4057       
+ /home/chetha
+INTERGER VAL: 0 4.4057
+INTERGER VAL: 4 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 4.15412      
+ /home/chetha
+INTERGER VAL: 0 4.15412
+INTERGER VAL: 4 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 4.89288      
+ /home/chetha
+INTERGER VAL: 0 4.89288
+INTERGER VAL: 4 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.45524      
+ /home/chetha
+INTERGER VAL: 0 3.45524
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 3.08218      
+ /home/chetha
+INTERGER VAL: 0 3.08218
+INTERGER VAL: 3 
+
+INTERGER VAL: 0OUTFILE DATA: /home/chetha 5.4095       
+ /home/chetha
+INTERGER VAL: 0 5.4095
+INTERGER VAL: 5 
+
+INTERGER VAL: 0

@@ -14,17 +14,17 @@ if (isset($_REQUEST['imageData'])) {
     // Path where the image is going to be saved
     $filePath = 'uploads/myImage.png';
 
-    error_log("2 " . file_exists($filePath));
+//    error_log("2 " . file_exists($filePath));
     // Delete previously uploaded image
-    if (file_exists($filePath)) {
-        unlink($filePath);
-    }
+//    if (file_exists($filePath)) {
+//        unlink($filePath);
+//    }
     error_log("3 " . $data);
 
     // Write $imgData into the image file
-    $file = fopen($filePath, 'w');
-    fwrite($file, $data);
-    fclose($file);
+//    $file = fopen($filePath, 'w');
+//    fwrite($file, $data);
+//    fclose($file);
 
 //    $output = shell_exec('sh runscript.sh uploads/myImage.png ');
       $output = shell_exec('./FREngine');

@@ -39,6 +39,7 @@
             background-color: rgba(0, 0, 0, 0.3);
             border: 0;
             animation: blinker 2s linear infinite;
+            -webkit-animation: blinker 2s linear infinite;
         }
 
         div#counter {
@@ -54,6 +55,11 @@
             font-size: 8rem;
         }
 
+        @-webkit-keyframes blinker {
+            50% {
+                opacity: 0.0;
+            }
+        }
         @keyframes blinker {
             50% {
                 opacity: 0.0;

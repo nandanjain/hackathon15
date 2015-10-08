@@ -29,27 +29,41 @@
 
         button#request_access {
             position: absolute;
+            top: 0px;
+            left: 0px;
             height: 100%;
             width: 100%;
-            font-size: x-large;
+            font-size: 8rem;
+            z-index: 100;
+            color: Yellow;
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 0;
+            animation: blinker 2s linear infinite;
         }
 
         div#counter {
             position: absolute;
             top: 0px;
             left: 0px;
-            height: auto;
-            width: auto;
+            height: 100%;
+            width: 100%;
             text-align: center;
             color: rgba(255, 0, 0, 0.4);
             display: none;
             z-index: 999;
             font-size: 8rem;
         }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0.0;
+            }
+        }
     </style>
 </head>
 <body onload="init();">
-<button id="request_access" onclick="requestCapture()">Request Access</button>
+<button id="request_access" onclick="requestCapture()">Click to Access</button>
+<div id="face_area"></div>
 <div id="counter"></div>
 <video autoplay></video>
 <canvas></canvas>
@@ -58,14 +72,16 @@
     var counterDiv = document.getElementById("counter");
 
     function init() {
-        document.getElementById("request_access").style.height = screen.availHeight;
+        alert("Press OK to go fullscreen");
+//        document.getElementById("request_access").style.height = screen.availHeight/2;
+//        document.getElementById("request_access").style.width = screen.availWidth/2;
+        launchIntoFullscreen(document.getElementsByTagName("body")[0]);
+        startCamera();
     }
     function requestCapture() {
         document.getElementById("request_access").style.display = "none";
-        launchIntoFullscreen(document.getElementsByTagName("body")[0]);
-        startCapture();
+        startCaptureTimer();
     }
-
     function launchIntoFullscreen(element) {
         if (element.requestFullscreen) {
             element.requestFullscreen();
@@ -77,98 +93,124 @@
             element.msRequestFullscreen();
         }
     }
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    var video = document.querySelector('video');
+    var canvas = document.querySelector('canvas');
+    var localMediaStream = null;
+    var tmpCtx = canvas.getContext('2d');
+    function snapshot() {
+        if (localMediaStream) {
+            // "image/webp" works in Chrome.
+            // Other browsers will fall back to image/png.
+            var picUrl = canvas.toDataURL('image/png');
+            var image = new Image();
+            image.style.display = "block";
+            image.onload = function () {
+                tmpCtx.drawImage(image, 0, 0, video.videoWidth, video.videoHeight);
+            };
+            image.src = picUrl;
+            picUrl = picUrl.replace(/^data:image\/(png|jpg);base64,/, "");
 
-    function startCapture() {
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-
-        var video = document.querySelector('video');
-        var canvas = document.querySelector('canvas');
-        canvas.style.display = "block";
-
-        var tmpCtx = canvas.getContext('2d');
-        var localMediaStream = null;
-
-        function snapshot() {
-            if (localMediaStream) {
-                // "image/webp" works in Chrome.
-                // Other browsers will fall back to image/png.
-                var picUrl = canvas.toDataURL('image/png');
-                var image = new Image();
-                image.style.display = "block";
-                image.onload = function () {
-                    tmpCtx.drawImage(image, 0, 0, video.videoWidth, video.videoHeight);
-                };
-                image.src = picUrl;
-                picUrl = picUrl.replace(/^data:image\/(png|jpg);base64,/, "");
-
-                var serverReq = new XMLHttpRequest();
-                serverReq.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        var response = this.responseText;
-                        if (!response || response.length === 0) {
-                            pollRequest();
-                        } else {
-                            var resp_arr = response.split(":");
-                            if (resp_arr[0] === 'name') {
-                                auth_success(resp_arr[1]);
-                            }
+            var serverReq = new XMLHttpRequest();
+            serverReq.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var response = this.responseText;
+                    if (!response || response.length === 0) {
+                        pollRequest();
+                    } else {
+                        var resp_arr = response.split(":");
+                        if (resp_arr[0] === 'name') {
+                            auth_success(resp_arr[1]);
                         }
                     }
-                };
-                serverReq.open("POST", "server.php", true);
-                serverReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                serverReq.send("imageData=" + picUrl);
-
-                counterDiv.style.fontSize = null;
-                auth_pending();
-            }
-        }
-
-        function auth_success(name) {
-            // display welcome message
-            counterDiv.style.color = "Green";
-            counterDiv.innerHTML = "Welcome " + (name ? name : "!!!");
-        }
-
-        function auth_pending() {
-            // display waiting message
-            counterDiv.style.color = "orange";
-            counterDiv.innerHTML = "Verifying...";
-        }
-
-        function auth_denied() {
-            // display Access Denied Message
-            counterDiv.style.color = "RED";
-            counterDiv.innerHTML = "Access is Denied !!!";
-        }
-
-        function pollRequest() {
-            var httpReq = new XMLHttpRequest();
-            httpReq.open("GET", "server.php?pollAuthRequest=" + new Date().getTime(), true);
-            httpReq.onreadystatechange = pollResponse;
-            httpReq.send(null);
-        }
-
-        function pollResponse() {
-            if (this.readyState == 4 && this.status == 200) {
-                switch (this.responseText) {
-                    case 'status:approved' :
-                        auth_success();
-                        break;
-                    case 'status:rejected' :
-                        auth_denied();
-                        break;
-                    case 'status:inprogress':
-                    default :
-                        setTimeout(pollRequest, 1000);
-                        break;
                 }
+            };
+            serverReq.open("POST", "server.php", true);
+            serverReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            serverReq.send("imageData=" + picUrl);
+
+            counterDiv.style.fontSize = null;
+            auth_pending();
+        }
+    }
+
+    function auth_success(name) {
+        // display welcome message
+        counterDiv.style.color = "Green";
+        counterDiv.innerHTML = "Welcome " + (name ? name : "!!!");
+    }
+
+    function auth_pending() {
+        // display waiting message
+        counterDiv.style.color = "orange";
+        counterDiv.innerHTML = "Verifying...";
+    }
+
+    function auth_denied() {
+        // display Access Denied Message
+        counterDiv.style.color = "RED";
+        counterDiv.innerHTML = "Access is Denied !!!";
+    }
+
+    var pollCounter = 0;
+    var MAX_POLL_COUNT = (5 * 60 * 60); //5 mins
+
+    function pollRequest() {
+        var httpReq = new XMLHttpRequest();
+        httpReq.open("GET", "server.php?pollAuthRequest=" + new Date().getTime(), true);
+        httpReq.onreadystatechange = pollResponse;
+        httpReq.send(null);
+        pollCounter++;
+    }
+
+    function pollResponse() {
+        if (this.readyState == 4 && this.status == 200) {
+            switch (this.responseText) {
+                case 'status:approved' :
+                    auth_success();
+                    break;
+                case 'status:rejected' :
+                    auth_denied();
+                    break;
+                case 'status:inprogress':
+                default :
+                    if (pollCounter < MAX_POLL_COUNT) {
+                        setTimeout(pollRequest, 1000);
+                    } else {
+                        auth_denied();
+                    }
+                    break;
             }
         }
+    }
+
+    var counterInterval = undefined;
+    var interval = undefined;
+
+    function startCaptureTimer() {
+        if (!counterInterval) {
+            var count = 5;
+            counterDiv.style.fontSize = "18rem";
+            counterDiv.style.display = "block";
+            counterInterval = setInterval(function () {
+                if (count === 0) {
+                    clearInterval(counterInterval);
+                    clearInterval(interval);
+                    interval = undefined;
+                    counterInterval = undefined;
+                    snapshot();
+                } else {
+                    counterDiv.innerHTML = count;
+                }
+                count--;
+            }, 1000);
+        }
+    }
+
+    function startCamera() {
+        canvas.style.display = "block";
 
         function success(stream) {
-            var counterInterval = undefined;
-            var interval = undefined;
             video.src = window.URL.createObjectURL(stream);
             localMediaStream = stream;
             interval = setInterval(function () {
@@ -176,24 +218,6 @@
                     canvas.height = video.videoHeight;
                     canvas.width = video.videoWidth;
                     tmpCtx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
-
-                    if (!counterInterval) {
-                        var count = 5;
-                        counterDiv.style.fontSize = "30rem";
-                        counterDiv.style.display = "block";
-                        counterInterval = setInterval(function () {
-                            if (count === 0) {
-                                clearInterval(counterInterval);
-                                clearInterval(interval);
-                                interval = undefined;
-                                counterInterval = undefined;
-                                snapshot();
-                            } else {
-                                counterDiv.innerHTML = count;
-                            }
-                            count--;
-                        }, 1000);
-                    }
                 }
             }, 100);
         }

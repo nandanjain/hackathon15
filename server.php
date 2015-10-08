@@ -67,6 +67,24 @@ if (isset($_REQUEST['imageData'])) {
     error_log("Sorry, the key does not exist");
 }
 
+function sendSpark()
+{
+    $url = 'http://api.particle.io';
+    $data = array('access_token' => '8a6a2fb3fd5d276609ea960af008247c72e34a97');
+
+    // use key 'http' even if you send the request to https://...
+    $options = array(
+        'http' => array(
+            'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+            'method' => 'POST',
+            'content' => http_build_query($data),
+        ),
+    );
+    $context = stream_context_create($options);
+    $result = file_get_contents($url, false, $context);
+    error_log("sendSpark : " . $result);
+}
+
 //function to log and open
 function logAndOpen($arg)
 {
@@ -74,7 +92,7 @@ function logAndOpen($arg)
     $output = shell_exec("sh logEntry.sh $arg");
 
     // Invoke Spark API
-    //$response = file_get_contents('http://example.com/');
+    sendSpark();
 
     // move the stranger pic to approved state
     shell_exec('mv stranger/image.png stranger/image_approved.png');

@@ -1,0 +1,35 @@
+             ../uploads/m 
+/home/chetha -3.40282e+38 
+/home/chetha 0.393242     
+/home/chetha -0.00230833  
+/home/chetha 0.586665     
+/home/chetha 0.281257     
+/home/chetha 0.26782      
+/home/chetha 0.25898      
+/home/chetha 0.59208      
+/home/chetha 0.744197     
+/home/chetha 0.315401     
+             ../uploads/m 
+/home/chetha 0.272877     
+/home/chetha 0.0476801    
+/home/chetha 0.343771     
+/home/chetha 0.343771     
+/home/chetha 0.396814     
+/home/chetha -0.1417      
+/home/chetha 0.0765957    
+/home/chetha -0.257591    
+/home/chetha 5.68688      
+/home/chetha 0.643342     
+U1
+/nbr -algorithm FaceRecognition -compare ../uploads/myImage.png ../Authorized/U1
+/U2
+/nbr -algorithm FaceRecognition -compare ../uploads/myImage.png ../Authorized/U2
+/U3
+/nbr -algorithm FaceRecognition -compare ../uploads/myImage.png ../Authorized/U3
+/U4
+/nbr -algorithm FaceRecognition -compare ../uploads/myImage.png ../Authorized/U4
+/U5
+/nbr -algorithm FaceRecognition -compare ../uploads/myImage.png ../Authorized/U5
+/Un
+/nbr -algorithm FaceRecognition -compare ../uploads/myImage.png ../Authorized/Un
+/

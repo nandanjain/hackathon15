@@ -27,14 +27,15 @@ if (isset($_REQUEST['imageData'])) {
     fclose($file);
 
 //    $output = shell_exec('sh runscript.sh uploads/myImage.png ');
+      $output = shell_exec('./FREngine');
+//    error_log("Output of Face Recog.\n" . $output);
     $output1 = shell_exec('cat /tmp/result.txt');
-    error_log("Output of Face Recog.\n" . $output);
     error_log("Final Score: " . $output1);
 //    settype($output1, "integer");
     if(empty($output1) == false) {
 	error_log("The match is SUCCESS !!!!");
         //Also authorize and Open
-        //logAndOpen("TestArgTODOReplace");
+        logAndOpen("$output1");
 	echo "Name: $output1";
         
     } else {
@@ -51,7 +52,10 @@ function logAndOpen($arg) {
     $output = shell_exec("sh logEntry.sh $arg");
 
     // Invoke Spark API
-    $response = file_get_contents('http://example.com/');
+    //$response = file_get_contents('http://example.com/');
+
+    // Remove the stranger pic
+    shell_exec('rm stranger/*');
 
 }
 

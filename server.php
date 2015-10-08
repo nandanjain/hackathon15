@@ -5,6 +5,7 @@
  * Date: 10/6/15
  * Time: 10:52 PM
  */
+
 error_log("Hello... I am here");
 if (isset($_REQUEST['imageData'])) {
     $imgData = $_REQUEST['imageData'];
@@ -35,9 +36,36 @@ if (isset($_REQUEST['imageData'])) {
     settype($output1, "integer");
     if($output1 >= 3) {
 	error_log("The match is SUCCESS !!!!");
+        //Also authorize and Open
+        logAndOpen("TestArgTODOReplace");
+        
     } else {
         error_log("The match is FAILED !!!!");
     }
+} else {
+    error_log("Sorry, the key does not exist");
+}
+
+//function to log and open
+function logAndOpen($arg) {
+    //Enter into the DB
+    $output = shell_exec("sh logEntry.sh $arg");
+
+    // Invoke Spark API
+    $response = file_get_contents('http://example.com/');
+
+}
+
+
+// Authorize Open in Database as well as Spark
+if (isset($_REQUEST['authorizeOpen'])) {
+    $imgData = $_REQUEST['authorizeOpen'];
+    $imgData = str_replace(" ", "+", $imgData);
+    $data = base64_decode($imgData);
+//    $data = $imgData;
+    error_log("1 " . $imgData);
+    logAndOpen($imgData); 
+
 } else {
     error_log("Sorry, the key does not exist");
 }

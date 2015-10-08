@@ -55,7 +55,7 @@ if (isset($_REQUEST['imageData'])) {
 } else if (isset($_REQUEST['authorizeOpen'])) {
     // Authorize Open in Database as well as Spark
     error_log("Owner Approved the request");
-    logAndOpen($imgData);
+    logAndOpen("Stranger");
 } else if (isset($_REQUEST['rejectAccess'])) {
     // Reject the access
     error_log("Rejected Access");

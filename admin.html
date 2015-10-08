@@ -90,8 +90,38 @@
             top: 10%;
             left: 10%;
             height: 60%;
-            width: 100%;
+            width: 70%;
             border: 2rem solid red;
+            display: none;
+        }
+
+        img {
+            position: relative;
+            top: 0;
+            /* border: 1px solid red; */
+            left: 50%;
+            height: 100%;
+            width: 50%;
+            background-color: black;
+        }
+
+        button {
+            position: absolute;
+            left: 0;
+            height: 50%;
+            width: 50%;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        button#button_accept {
+            top: 0%;
+            color: darkgreen;
+        }
+
+        button#button_reject {
+            top: 50%;
+            color: red;
         }
     </style>
 
@@ -112,11 +142,28 @@
 </div>
 <div id="accessRequest">
     <img src="" id="stranger_img">
-    <button id="button_accept"></button>
-    <button id="button_reject"></button>
+    <button id="button_accept" onclick="allow_access()">Allow</button>
+    <button id="button_reject" onclick="deny_access()">Deny</button>
 </div>
 
 <script type="text/javascript">
+    var logPage = document.getElementById("logPage");
+    var loginPage = document.getElementById("login");
+    var accessRequest = document.getElementById("accessRequest");
+    function allow_access() {
+        var httpReq = new XMLHttpRequest();
+        httpReq.open("POST", "server.php", true);
+        httpReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        httpReq.send("authorizeOpen=true&" + new Date().getTime());
+        accessRequest.style.display = "none";
+    }
+    function deny_access() {
+        var httpReq = new XMLHttpRequest();
+        httpReq.open("POST", "server.php", true);
+        httpReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        httpReq.send("rejectAccess=true&" + new Date().getTime());
+        accessRequest.style.display = "none";
+    }
     function loginSubmit() {
         var username = document.getElementById("email").value;
         var password = document.getElementById("password").value;
@@ -141,24 +188,22 @@
         }
     }
     function auth_success() {
-        document.getElementById("login").style.display = "none";
+        loginPage.style.display = "none";
         showLogPage();
     }
     function auth_denied() {
         alert("User Name or password is incorrect");
     }
     function showLogPage() {
-        document.getElementById("logPage").style.display = "block";
+        logPage.style.display = "block";
         pollRequest();
     }
     function pollRequest() {
-        alert("sending poll");
         var httpReq = new XMLHttpRequest();
         httpReq.open("GET", "stranger/image.png?" + new Date().getTime(), true);
         httpReq.onreadystatechange = pollResponse;
         httpReq.send(null);
     }
-
     function pollResponse() {
         if (this.readyState == 4) {
             if (this.status == 200) {
@@ -169,14 +214,11 @@
             }
         }
     }
-
     function requestAccess() {
-        var accesReq = document.getElementById("accessRequest");
         var image = document.getElementById("stranger_img");
-        accesReq.style.display = "block";
+        accessRequest.style.display = "block";
         image.src = "stranger/image.png?" + new Date().getTime();
     }
-
 </script>
 </body>
 </html>

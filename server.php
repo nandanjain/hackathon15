@@ -6,6 +6,7 @@
  * Time: 10:52 PM
  */
 
+date_default_timezone_set("America/New_York");
 error_log("Hello... I am here");
 if (isset($_REQUEST['imageData'])) {
     $imgData = $_REQUEST['imageData'];
@@ -29,19 +30,21 @@ if (isset($_REQUEST['imageData'])) {
     error_log("Output of Face Recog.\n" . $output);
     $output1 = shell_exec('cat result.txt');
     error_log("Final Score: " . $output1);
+
     if (empty($output1) == false) {
         error_log("The match is SUCCESS !!!!");
         //Also authorize and Open
         $Name = strtok($output1, ',');
-        logAndOpen("$Name");
+        logAndOpen(false, "$Name");
         echo "name:$Name";
     } else {
-        $output1 = shell_exec('rm  stranger/*');
+        $output1 = shell_exec('rm  stranger/*.png');
         $output1 = shell_exec('cp uploads/myImage.png stranger/image.png');
         error_log("The match is FAILED !!!!");
         echo "";
     }
-} else if (isset($_REQUEST['adminLogin'])) {
+}
+else if (isset($_REQUEST['adminLogin'])) {
     // Reject the access
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -52,15 +55,21 @@ if (isset($_REQUEST['imageData'])) {
     } else {
         echo "login:failure";
     }
-} else if (isset($_REQUEST['authorizeOpen'])) {
+}
+else if (isset($_REQUEST['authorizeOpen'])) {
     // Authorize Open in Database as well as Spark
     error_log("Owner Approved the request");
-    logAndOpen("Stranger");
-} else if (isset($_REQUEST['rejectAccess'])) {
+    logAndOpen(true, "Stranger");
+
+}
+else if (isset($_REQUEST['rejectAccess'])) {
     // Reject the access
     error_log("Rejected Access");
+    $fileName = "Stranger" . '_' . time();
+    shell_exec('cp stranger/image.png stranger/Rejected/' . $fileName . '.png');
     shell_exec('mv stranger/image.png stranger/image_rejected.png');
-} else if (isset($_REQUEST['pollAuthRequest'])) {
+}
+else if (isset($_REQUEST['pollAuthRequest'])) {
     // Poll for Stranger
     error_log("Polling...");
     if (file_exists('stranger/image_approved.png')) {
@@ -75,7 +84,14 @@ if (isset($_REQUEST['imageData'])) {
             echo "status:inprogress";
         }
     }
-} else {
+}
+else if (isset($_REQUEST['adminGetLogRequest'])) {
+    // Poll for Stranger
+    $output = shell_exec("ls -m log");
+    error_log("Admin requesting Access logs..." . $output);
+    echo $output;
+}
+else {
     error_log("Sorry, the key does not exist");
 }
 
@@ -103,18 +119,22 @@ function sendSpark()
     error_log("Successfully sent to Spark");
 }
 
-
 //function to log and open
-function logAndOpen($arg)
+function logAndOpen($isStranger, $arg)
 {
+    $fileName = $arg . '_' . time();
     //Enter into the DB
-    $output = shell_exec("sh logEntry.sh $arg");
+    $output = shell_exec("sh logEntry.sh $fileName");
 
     // Invoke Spark API
 //    sendSpark();
-
-    // move the stranger pic to approved state
-    shell_exec('mv stranger/image.png stranger/image_approved.png');
+    if($isStranger) {
+        // move the stranger pic to approved state
+        shell_exec('cp stranger/image.png stranger/Authorized/' . $fileName . '.png');
+        shell_exec('mv stranger/image.png stranger/image_approved.png');
+    } else {
+        shell_exec('cp uploads/myImage.png Authorized/'. $arg . '/' . $fileName . '.png');
+    }
 }
 
 ?>

@@ -111,7 +111,7 @@ function logAndOpen($arg)
     $output = shell_exec("sh logEntry.sh $arg");
 
     // Invoke Spark API
-    sendSpark();
+//    sendSpark();
 
     // move the stranger pic to approved state
     shell_exec('mv stranger/image.png stranger/image_approved.png');

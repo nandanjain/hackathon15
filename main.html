@@ -60,6 +60,7 @@
                 opacity: 0.0;
             }
         }
+
         @keyframes blinker {
             50% {
                 opacity: 0.0;
@@ -78,29 +79,27 @@
     var counterDiv = document.getElementById("counter");
 
     function init() {
-    var isMobile = {
-        Android: function() {
-            return navigator.userAgent.match(/Android/i);
-        },
-        BlackBerry: function() {
-            return navigator.userAgent.match(/BlackBerry/i);
-        },
-        iOS: function() {
-            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-        },
-        Opera: function() {
-            return navigator.userAgent.match(/Opera Mini/i);
-        },
-        Windows: function() {
-            return navigator.userAgent.match(/IEMobile/i);
-        },
-        any: function() {
-            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-        }
-    };
-        if(!isMobile.any()) alert("Press OK to go fullscreen");
-//        document.getElementById("request_access").style.height = screen.availHeight/2;
-//        document.getElementById("request_access").style.width = screen.availWidth/2;
+        var isMobile = {
+            Android: function () {
+                return navigator.userAgent.match(/Android/i);
+            },
+            BlackBerry: function () {
+                return navigator.userAgent.match(/BlackBerry/i);
+            },
+            iOS: function () {
+                return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+            },
+            Opera: function () {
+                return navigator.userAgent.match(/Opera Mini/i);
+            },
+            Windows: function () {
+                return navigator.userAgent.match(/IEMobile/i);
+            },
+            any: function () {
+                return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+            }
+        };
+        if (!isMobile.any()) alert("Press OK to go fullscreen");
         launchIntoFullscreen(document.getElementsByTagName("body")[0]);
         startCamera();
     }
@@ -131,6 +130,7 @@
             // Other browsers will fall back to image/png.
             var picUrl = canvas.toDataURL('image/png');
             var image = new Image();
+            image.id = "capturedImage";
             image.style.display = "block";
             image.onload = function () {
                 tmpCtx.drawImage(image, 0, 0, video.videoWidth, video.videoHeight);
@@ -160,11 +160,17 @@
             auth_pending();
         }
     }
-
+    function restartCapture() {
+        document.getElementById("request_access").style.display = "block";
+        counterDiv.innerHTML = "";
+        counterDiv.style.display = "none";
+        paintVideo();
+    }
     function auth_success(name) {
         // display welcome message
         counterDiv.style.color = "Green";
         counterDiv.innerHTML = "Welcome " + (name ? name : "!!!");
+        setTimeout(restartCapture, 10000);
     }
 
     function auth_pending() {
@@ -177,6 +183,7 @@
         // display Access Denied Message
         counterDiv.style.color = "RED";
         counterDiv.innerHTML = "Access is Denied !!!";
+        setTimeout(restartCapture, 10000);
     }
 
     var pollCounter = 0;
@@ -234,19 +241,24 @@
         }
     }
 
+    function paintVideo() {
+        interval = setInterval(function () {
+            if (video.videoWidth > 0 && video.videoHeight > 0) {
+                canvas.height = video.videoHeight;
+                canvas.width = video.videoWidth;
+                tmpCtx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+            }
+        }, 100);
+    }
+
     function startCamera() {
+        counterDiv.style.display = "none";
         canvas.style.display = "block";
 
         function success(stream) {
             video.src = window.URL.createObjectURL(stream);
             localMediaStream = stream;
-            interval = setInterval(function () {
-                if (video.videoWidth > 0 && video.videoHeight > 0) {
-                    canvas.height = video.videoHeight;
-                    canvas.width = video.videoWidth;
-                    tmpCtx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
-                }
-            }, 100);
+            paintVideo();
         }
 
         function error(err) {

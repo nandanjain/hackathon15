@@ -156,6 +156,7 @@
         httpReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         httpReq.send("authorizeOpen=true&" + new Date().getTime());
         accessRequest.style.display = "none";
+        setTimeout(showLogPage, 12000);
     }
     function deny_access() {
         var httpReq = new XMLHttpRequest();
@@ -163,6 +164,7 @@
         httpReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         httpReq.send("rejectAccess=true&" + new Date().getTime());
         accessRequest.style.display = "none";
+        setTimeout(showLogPage, 12000);
     }
     function loginSubmit() {
         var username = document.getElementById("email").value;

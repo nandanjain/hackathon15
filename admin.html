@@ -86,14 +86,17 @@
             display: none;
         }
 
-        img {
+        img#stranger_img {
             position: relative;
             top: 0;
-            /* border: 1px solid red; */
             left: 50%;
             height: 100%;
             width: 50%;
             background-color: black;
+        }
+
+        div#logPage {
+            display: none;
         }
 
         button {
@@ -101,7 +104,7 @@
             left: 0;
             height: 33%;
             width: 50%;
-            font-size: 2rem;
+            font-size: 80%;
             font-weight: bold;
         }
 
@@ -119,6 +122,61 @@
             top: 66%;
             color: red;
         }
+
+        table {
+            width: 100%;
+        }
+
+        tr {
+            height: 10%;
+        }
+
+        td {
+            padding: 0;
+            height: 10%;
+        }
+
+        td > img {
+            height: 20%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: red;
+        }
+
+        td > div {
+            height: 50%;
+            text-align: center;
+            font-size: 60%;
+        }
+
+        td > div.logName {
+            font-size: 100%;
+            font-weight: bold;
+        }
+
+        .approved {
+            background-color: #70ff56;
+        }
+
+        .reject {
+            background-color: #ff9595;
+        }
+
+        .image_td {
+            width: 20%;
+        }
+
+        .text_td {
+            width: 90%;
+        }
+
+        #logPage > span {
+            width: 100%;
+            text-align: center;
+            font-size: 100%;
+            font-weight: bold;
+        }
     </style>
 
 </head>
@@ -126,15 +184,25 @@
 <div id="login">
     <h2>Login</h2>
     <label>EMail :</label>
-    <input id="email" name="email" placeholder="email@server.com" type="text">
+    <input id="email" name="email" placeholder="email@server.com" type="text" value="karthven@gmail.com">
     <label>Password :</label>
-    <input id="password" name="password" placeholder="**********" type="password">
+    <input id="password" name="password" placeholder="**********" type="password" value="hack">
     <input name="submit" type="button" value=" Login " onclick="loginSubmit()">
     <span id="error_message"></span>
 </div>
 <div id="logPage">
-    Checking if there is someone at door...
-    You will be notified.
+    <span>Eye Protect Access Logs</span>
+    <table id="logTable">
+        <tr class="logRow">
+            <td class="image_td">
+                <img src="" class="logImg">
+            </td>
+            <td class="text_td">
+                <div class="logName">Name</div>
+                <div class="logTime">Time</div>
+            </td>
+        </tr>
+    </table>
 </div>
 <div id="accessRequest">
     <img src="" id="stranger_img">
@@ -147,23 +215,22 @@
     var logPage = document.getElementById("logPage");
     var loginPage = document.getElementById("login");
     var accessRequest = document.getElementById("accessRequest");
-
     function allow_once() {
         var httpReq = new XMLHttpRequest();
         httpReq.open("POST", "server.php", true);
         httpReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         httpReq.send("authorizeOnce=true&" + new Date().getTime());
         accessRequest.style.display = "none";
-        setTimeout(showLogPage, 12000);
+        setTimeout(showLogPage, 2000);
     }
-    function allow_perm(permanent) {
+    function allow_perm() {
         var name = prompt("Enter the Name for person", '');
         var httpReq = new XMLHttpRequest();
         httpReq.open("POST", "server.php", true);
         httpReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         httpReq.send("authorizePerm=" + name + "&" + new Date().getTime());
         accessRequest.style.display = "none";
-        setTimeout(showLogPage, 12000);
+        setTimeout(showLogPage, 2000);
     }
     function deny_access() {
         var httpReq = new XMLHttpRequest();
@@ -171,12 +238,11 @@
         httpReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         httpReq.send("rejectAccess=true&" + new Date().getTime());
         accessRequest.style.display = "none";
-        setTimeout(showLogPage, 12000);
+        setTimeout(showLogPage, 2000);
     }
     function loginSubmit() {
         var username = document.getElementById("email").value;
         var password = document.getElementById("password").value;
-        alert(username + " : " + password);
 
         var httpReq = new XMLHttpRequest();
         httpReq.open("POST", "server.php", true);
@@ -205,21 +271,68 @@
     }
     function showLogPage() {
         logPage.style.display = "block";
+        //adminGetLogRequest
+
+        var httpReq = new XMLHttpRequest();
+        var param = "adminGetLogRequest=" + new Date().getTime();
+        httpReq.open("GET", "server.php?" + param, true);
+        httpReq.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                logsAvailable(this.responseText);
+            }
+        };
+        httpReq.send(null);
+        accessRequest.style.display = "none";
         pollRequest();
+    }
+    function logsAvailable(logs) {
+        var table = document.getElementById("logTable");
+        var trowList = table.getElementsByClassName("logRow");
+        var row = trowList[0];
+        if (logs && logs.length > 0) {
+            var fileArray = logs.split(",");
+            for (var i = 0; i < fileArray.length; i++) {
+                var fileName = fileArray[i].trim() + ".png";
+                var fileNameArr = fileName.split("_");
+                var name = fileNameArr[0].trim();
+                var time = parseInt(fileNameArr[1]);
+
+                var imgEle = row.getElementsByClassName("logImg")[0];
+                var nameEle = row.getElementsByClassName("logName")[0];
+                var timeEle = row.getElementsByClassName("logTime")[0];
+
+                timeEle.innerHTML = new Date(time * 1000);
+                if (name === "StrangerA") {
+                    imgEle.src = "stranger/Authorized/" + fileName;
+                    nameEle.innerHTML = "Unknown";
+                    row.className = "logRow approved";
+                } else if (name === "StrangerR") {
+                    imgEle.src = "stranger/Rejected/" + fileName;
+                    nameEle.innerHTML = "Unknown";
+                    row.className = "logRow reject";
+                } else {
+                    imgEle.src = "Authorized/" + name + "/" + fileName;
+                    nameEle.innerHTML = name;
+                    row.className = "logRow approved";
+                }
+                table.appendChild(row);
+                row = row.cloneNode(true);
+            }
+        }
     }
     function pollRequest() {
         var httpReq = new XMLHttpRequest();
-        httpReq.open("GET", "stranger/image.png?" + new Date().getTime(), true);
+        httpReq.open("GET", "server.php?adminPollRequest=dd?" + new Date().getTime(), true);
         httpReq.onreadystatechange = pollResponse;
         httpReq.send(null);
     }
     function pollResponse() {
-        if (this.readyState == 4) {
-            if (this.status == 200) {
+        if (this.readyState == 4 && this.status === 200) {
+            if (this.responseText == "stranger:atDoor") {
                 alert("SomeOne is ur door !!!");
                 requestAccess();
             } else {
-                setTimeout(pollRequest, 5000);
+                setTimeout(pollRequest, 2000);
             }
         }
     }

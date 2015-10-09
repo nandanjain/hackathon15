@@ -63,12 +63,15 @@ else if (isset($_REQUEST['adminLogin'])) {
 } else if (isset($_REQUEST['authorizeOnce'])) {
     // Authorize Open in Database as well as Spark
     error_log("Owner Approved the request");
-    logAndOpen(0, "Stranger");
+    logAndOpen(0, "StrangerA");
 }
 else if (isset($_REQUEST['rejectAccess'])) {
     // Reject the access
     error_log("Rejected Access");
-    $fileName = "Stranger" . '_' . time();
+    $fileName = "StrangerR" . '_' . time();
+    //Enter into the DB
+    $output = shell_exec("sh logEntry.sh $fileName");
+
     shell_exec('cp stranger/image.png stranger/Rejected/' . $fileName . '.png');
     shell_exec('mv stranger/image.png stranger/image_rejected.png');
 }
@@ -90,10 +93,19 @@ else if (isset($_REQUEST['pollAuthRequest'])) {
 }
 else if (isset($_REQUEST['adminGetLogRequest'])) {
     // Poll for Stranger
-    $output = shell_exec("ls -m log");
+    $output = shell_exec("ls -mt log");
     error_log("Admin requesting Access logs..." . $output);
     echo $output;
+} else if (isset($_REQUEST['adminPollRequest'])) {
+    // Poll for Stranger
+    error_log("Admin Polling...");
+    if (file_exists('stranger/image.png')) {
+        echo "stranger:atDoor";
+    } else {
+        echo "";
+    }
 }
+
 else {
     error_log("Sorry, the key does not exist");
 }

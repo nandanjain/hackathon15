@@ -11,15 +11,6 @@
             font-size: 1.8rem;
         }
 
-        /* Login Page */
-        #main {
-            text-align: center;
-        }
-
-        span.error_message {
-            color: red
-        }
-
         h1 {
             font-size: 5rem;
             text-shadow: 0.3rem 0.3rem rgba(200, 200, 200, .5);
@@ -108,19 +99,24 @@
         button {
             position: absolute;
             left: 0;
-            height: 50%;
+            height: 33%;
             width: 50%;
             font-size: 2rem;
             font-weight: bold;
         }
 
-        button#button_accept {
+        button#accept_always {
             top: 0%;
             color: darkgreen;
         }
 
-        button#button_reject {
-            top: 50%;
+        button#accept_now {
+            top: 33%;
+            color: green;
+        }
+
+        button#reject {
+            top: 66%;
             color: red;
         }
     </style>
@@ -142,19 +138,30 @@
 </div>
 <div id="accessRequest">
     <img src="" id="stranger_img">
-    <button id="button_accept" onclick="allow_access()">Allow</button>
-    <button id="button_reject" onclick="deny_access()">Deny</button>
+    <button id="accept_always" onclick="allow_perm()">Allow Always</button>
+    <button id="accept_now" onclick="allow_once()">Allow for Now</button>
+    <button id="reject" onclick="deny_access()">Deny</button>
 </div>
 
 <script type="text/javascript">
     var logPage = document.getElementById("logPage");
     var loginPage = document.getElementById("login");
     var accessRequest = document.getElementById("accessRequest");
-    function allow_access() {
+
+    function allow_once() {
         var httpReq = new XMLHttpRequest();
         httpReq.open("POST", "server.php", true);
         httpReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        httpReq.send("authorizeOpen=true&" + new Date().getTime());
+        httpReq.send("authorizeOnce=true&" + new Date().getTime());
+        accessRequest.style.display = "none";
+        setTimeout(showLogPage, 12000);
+    }
+    function allow_perm(permanent) {
+        var name = prompt("Enter the Name for person", '');
+        var httpReq = new XMLHttpRequest();
+        httpReq.open("POST", "server.php", true);
+        httpReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        httpReq.send("authorizePerm=" + name + "&" + new Date().getTime());
         accessRequest.style.display = "none";
         setTimeout(showLogPage, 12000);
     }

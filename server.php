@@ -35,7 +35,7 @@ if (isset($_REQUEST['imageData'])) {
         error_log("The match is SUCCESS !!!!");
         //Also authorize and Open
         $Name = strtok($output1, ',');
-        logAndOpen(false, "$Name");
+        logAndOpen(2, "$Name");
         echo "name:$Name";
     } else {
         $output1 = shell_exec('rm  stranger/*.png');
@@ -55,12 +55,15 @@ else if (isset($_REQUEST['adminLogin'])) {
     } else {
         echo "login:failure";
     }
-}
-else if (isset($_REQUEST['authorizeOpen'])) {
+} else if (isset($_REQUEST['authorizePerm'])) {
     // Authorize Open in Database as well as Spark
     error_log("Owner Approved the request");
-    logAndOpen(true, "Stranger");
-
+    $name = $_REQUEST['authorizePerm'];
+    logAndOpen(1, "$name");
+} else if (isset($_REQUEST['authorizeOnce'])) {
+    // Authorize Open in Database as well as Spark
+    error_log("Owner Approved the request");
+    logAndOpen(0, "Stranger");
 }
 else if (isset($_REQUEST['rejectAccess'])) {
     // Reject the access
@@ -110,12 +113,16 @@ function logAndOpen($isStranger, $arg)
 
     // Invoke Spark API
     sendSpark();
-    if($isStranger) {
+    if ($isStranger == 0) {
         // move the stranger pic to approved state
         shell_exec('cp stranger/image.png stranger/Authorized/' . $fileName . '.png');
         shell_exec('mv stranger/image.png stranger/image_approved.png');
-    } else {
+    } else if ($isStranger == 1) {
+        shell_exec('mkdir -p Authorized/' . $arg);
         shell_exec('cp uploads/myImage.png Authorized/'. $arg . '/' . $fileName . '.png');
+        shell_exec('mv stranger/image.png stranger/image_approved.png');
+    } else {
+        shell_exec('cp uploads/myImage.png Authorized/' . $arg . '/' . $fileName . '.png');
     }
 }
 

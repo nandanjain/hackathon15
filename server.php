@@ -97,25 +97,7 @@ else {
 
 function sendSpark()
 {
-    $url = 'https://api.particle.io/v1/devices/55ff6a065075555322151787/GainAccess';
-    $fields = array('access_token' => urlencode('8a6a2fb3fd5d276609ea960af008247c72e34a97'));
-    $fields_string = '';
-    //url-ify the data for the POST
-    foreach ($fields as $key => $value) {
-        $fields_string .= $key . '=' . $value . '&';
-    }
-    rtrim($fields_string, '&');
-
-    //open connection
-    $ch = curl_init();
-
-    //set the url, number of POST vars, POST data
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_POST, count($fields));
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-
-    //execute post
-    $result = curl_exec($ch);
+    shell_exec('sh runscript.sh');   
     error_log("Successfully sent to Spark");
 }
 
@@ -127,7 +109,7 @@ function logAndOpen($isStranger, $arg)
     $output = shell_exec("sh logEntry.sh $fileName");
 
     // Invoke Spark API
-//    sendSpark();
+    sendSpark();
     if($isStranger) {
         // move the stranger pic to approved state
         shell_exec('cp stranger/image.png stranger/Authorized/' . $fileName . '.png');

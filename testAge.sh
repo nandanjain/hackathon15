@@ -8,7 +8,7 @@ fi
 current=`date +%s`
 last_modified=`stat -c "%Y" $file`
 
-if [ $(($current-$last_modified)) -gt 60 ]; then 
+if [ $(($current-$last_modified)) -gt 30 ]; then 
      echo "old"; 
 else 
      echo "new"; 

@@ -221,7 +221,7 @@
         httpReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         httpReq.send("authorizeOnce=true&" + new Date().getTime());
         accessRequest.style.display = "none";
-        setTimeout(showLogPage, 5000);
+        setTimeout(showLogPage, 2000);
     }
     function allow_perm() {
         var name = prompt("Enter the Name for person", '');
@@ -230,7 +230,7 @@
         httpReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         httpReq.send("authorizePerm=" + name + "&" + new Date().getTime());
         accessRequest.style.display = "none";
-        setTimeout(showLogPage, 5000);
+        setTimeout(showLogPage, 2000);
     }
     function deny_access() {
         var httpReq = new XMLHttpRequest();
@@ -238,7 +238,7 @@
         httpReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         httpReq.send("rejectAccess=true&" + new Date().getTime());
         accessRequest.style.display = "none";
-        setTimeout(showLogPage, 5000);
+        setTimeout(showLogPage, 2000);
     }
     function loginSubmit() {
         var username = document.getElementById("email").value;
@@ -270,7 +270,6 @@
         alert("User Name or password is incorrect");
     }
     function showLogPage() {
-        alert("showLogPage");
         logPage.style.display = "block";
         //adminGetLogRequest
 
@@ -333,7 +332,7 @@
                 alert("SomeOne is ur door !!!");
                 requestAccess();
             } else {
-                setTimeout(pollRequest, 5000);
+                setTimeout(pollRequest, 2000);
             }
         }
     }

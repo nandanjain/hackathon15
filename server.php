@@ -5,7 +5,6 @@
  * Date: 10/6/15
  * Time: 10:52 PM
  */
-
 date_default_timezone_set("America/New_York");
 error_log("Hello... I am here");
 if (isset($_REQUEST['imageData'])) {
@@ -86,8 +85,15 @@ else if (isset($_REQUEST['pollAuthRequest'])) {
             error_log("Rejected");
             echo "status:rejected";
         } else {
-            error_log("InProgress");
-            echo "status:inprogress";
+            $isOld=checkAgeOfStranger();
+            if ($isOld == 1) {
+               error_log("Rejected");
+               echo "status:rejected";
+            } else {
+  
+              error_log("InProgress");
+              echo "status:inprogress";
+            }
         }
     }
 }
@@ -136,6 +142,14 @@ function logAndOpen($isStranger, $arg)
     } else {
         shell_exec('cp uploads/myImage.png Authorized/' . $arg . '/' . $fileName . '.png');
     }
+}
+
+function checkAgeOfStranger() {
+    $output = shell_exec('sh testAge.sh');
+    if ((!empty($output)) && (trim($output) == "old")) {
+      return 1; 
+    } 
+    return 0;
 }
 
 ?>
